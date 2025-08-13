@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<!-- Mirrored from dashlite.net/demo1/components/tables/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 07:45:04 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>DataTables - General | DashLite Admin Template</title>
+    <link rel="stylesheet" href="../../assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="../../assets/css/themee1e3.css?ver=3.2.4">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+     <style>
+        .spinner-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            /* Ensures it's above other content */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(21, 21, 41, 0.5);
+            color: #0c385f;
+            /* Optional: background shade */
+        }
+    </style>
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="components-preview wide-md mx-auto">
+                                            <div class="nk-block-head nk-block-head-lg wide-sm">
+                                                <div class="nk-block-head-content">
+
+                                                    <h6 class="nk-block-title fw-normal">Attendance for <%= date %>
+                                                    </h6>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="nk-block nk-block-lg">
+                                                <div class="card card-bordered card-preview">
+                                                    <div class="card-inner">
+                                                        <table class="datatable-init-export nowrap table"
+                                                            data-export-title="Attendance">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Name</th>
+                                                                    <th>Email</th>
+                                                                    <th>Is Present</th>
+                                                                    <th>Remarks</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% attendance.forEach((att, index)=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= index + 1 %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.staff.first_name + ' ' +
+                                                                                att.staff.last_name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.staff.email %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <input type="checkbox" class="is-present"
+                                                                                <%=att.isPresent ? 'checked' : '' %>
+                                                                            disabled>
+                                                                        </td>
+                                                                        <td>
+                                                                            <% if (!att.isPresent) { %>
+                                                                                <input type="text" class="remark"
+                                                                                    value="<%= att.remarks || '' %>"
+                                                                                    disabled>
+                                                                                <% } %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nk-footer">
+                            <div class="container-fluid">
+                                <div class="nk-footer-wrap">
+                                    <div class="nk-footer-copyright"> &copy; 2024 DashLite. Template by <a
+                                            href="https://softnio.com/" target="_blank">Softnio</a></div>
+                                    <div class="nk-footer-links">
+                                        <ul class="nav nav-sm">
+                                            <li class="nav-item dropup"><a href="#"
+                                                    class="dropdown-toggle dropdown-indicator has-indicator nav-link text-base"
+                                                    data-bs-toggle="dropdown"
+                                                    data-offset="0,10"><span>English</span></a>
+                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                                    <ul class="language-list">
+                                                        <li><a href="#" class="language-item"><span
+                                                                    class="language-name">English</span></a></li>
+                                                        <li><a href="#" class="language-item"><span
+                                                                    class="language-name">Español</span></a></li>
+                                                        <li><a href="#" class="language-item"><span
+                                                                    class="language-name">Français</span></a></li>
+                                                        <li><a href="#" class="language-item"><span
+                                                                    class="language-name">Türkçe</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="nav-item"><a data-bs-toggle="modal" href="#region"
+                                                    class="nav-link"><em class="icon ni ni-globe"></em><span
+                                                        class="ms-1">Select
+                                                        Region</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+
+    <a class="pmo-st pmo-dark" target="_blank" href="https://softnio.com/get-early-access/">
+        <div class="pmo-st-img"><img src="../../../images/landing/promo-investorm.png" alt="Investorm"></div>
+        <div class="pmo-st-text">Looking for Advanced <br> Investment Platform?</div>
+    </a>
+    <script src="../../assets/js/bundlee1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/scriptse1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/libs/datatable-btnse1e3.js?ver=3.2.4"></script>
+
+    <script>
+        $(document).ready(function () {
+            if (!$.fn.DataTable.isDataTable('.datatable-init-export')) {
+                $('.datatable-init-export').DataTable({
+                    responsive: true,
+                    dom: 'Bfrtip',
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                });
+            }
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+
+                window.location.reload();
+            }
+        });
+
+        $(document).ready(function () {
+            const currentPath = window.location.pathname;
+            console.log("Current Path:", currentPath);
+
+            $(".nk-menu-link").each(function () {
+                const linkPath = new URL(this.href).pathname;
+                console.log("Link Path:", linkPath);
+                if (linkPath === currentPath) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#logout-link').on('click', function (e) {
+                e.preventDefault();
+
+                console.log('reached')
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/logout',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        showToast("Success", "Logged out in successfully", "text-success");
+                        window.location.href = '/'
+                    },
+                    error: function (xhr) {
+                        let message = "Request failed. Please try again.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        showToast("Error", message, "text-danger");
+                        return;
+                    },
+                });
+            })
+
+            function showToast(title, body, titleClass) {
+                const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                const $toast = $(toastHtml);
+                $('.toast-container').append($toast);
+                const toast = new bootstrap.Toast($toast[0]);
+                toast.show();
+            }
+        })
+    </script>
+</body>
+<!-- Mirrored from dashlite.net/demo1/components/tables/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 07:45:04 GMT -->
+
+</html>

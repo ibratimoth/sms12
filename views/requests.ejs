@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/nidc1.png">
+    <title>Requests | National Internet Datacenter</title>
+    <link rel="stylesheet" href="/assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/themee1e3.css?ver=3.2.4">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <style>
+        .nk-menu-link:hover,
+        .nk-menu-link.active {
+            background-color: rgba(33, 157, 149, 0.1);
+            color: #219d95 !important;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, border-radius 0.2s ease;
+        }
+
+        .nk-menu-link:hover .nk-menu-icon em,
+        .nk-menu-link.active .nk-menu-icon em {
+            color: #219d95 !important;
+        }
+
+        .user-toggle {
+            color: #ffffff;
+            /* White text for contrast */
+        }
+
+        .user-avatar {
+            background-color: white !important;
+            /* change the circle's background */
+            color: #fff !important;
+            /* makes the icon inside white */
+        }
+
+        .user-toggle .user-avatar em {
+            color: #ffffff !important;
+            /* White icon */
+            background-color: #219d95;
+            /* Optional: background color for avatar */
+            border-radius: 50%;
+            padding: 6px;
+            outline: none;
+        }
+
+        .user-toggle:hover {
+            background-color: rgba(33, 157, 149, 0.2);
+            /* Subtle hover effect */
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        .icon-status em {
+            color: #ffffff !important;
+            /* White icon */
+            background-color: #219d95;
+            /* Optional: background color for avatar */
+            border-radius: 50%;
+            padding: 6px;
+            outline: none;
+        }
+    </style>
+
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="components-preview wide-md mx-auto">
+                                            <div class="nk-block-head nk-block-head-lg wide-sm">
+                                            </div>
+                                            <div class="nk-block nk-block-lg">
+                                                <div class="nk-block-head">
+                                                    <h2 class="nk-block-title fw-normal">Schedule a visit</h2>
+                                                </div>
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner">
+                                                        <form action="#"
+                                                            class="nk-wizard nk-wizard-simple is-vertical is-alter"
+                                                            id="wizard-02">
+                                                            <div class="nk-wizard-head">
+                                                                <h5>Initial Info</h5>
+                                                            </div>
+                                                            <div class="nk-wizard-content">
+                                                                <div class="row gy-3">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group"><label
+                                                                                class="form-label"
+                                                                                for="organization">Your
+                                                                                organization</label>
+                                                                            <div class="form-control-wrap"><input
+                                                                                    type="text" data-msg="Required"
+                                                                                    class="form-control required"
+                                                                                    placeholder="Enter your organization name"
+                                                                                    id="organization"
+                                                                                    name="organization"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"
+                                                                                for="DepartmentId">Department</label>
+                                                                            <div class="form-control-wrap">
+                                                                                <div class="form-control-select">
+                                                                                    <select
+                                                                                        class="form-control required"
+                                                                                        data-msg="Required"
+                                                                                        id="DepartmentId"
+                                                                                        name="DepartmentId" required>
+                                                                                        <option value="">---Select
+                                                                                            Department---</option>
+                                                                                        <!-- Options will be inserted dynamically -->
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group"><label
+                                                                                class="form-label"
+                                                                                for="visit-type">Visit
+                                                                                type</label>
+                                                                            <div class="form-control-wrap ">
+                                                                                <div class="form-control-select"><select
+                                                                                        class="form-control required"
+                                                                                        data-msg="Required"
+                                                                                        id="visit-type"
+                                                                                        name="visit-type" required>
+                                                                                        <option value="">---Select visit
+                                                                                            type---
+                                                                                        </option>
+                                                                                        <option value="individual">
+                                                                                            Individual
+                                                                                            visit
+                                                                                        </option>
+                                                                                        <option value="group" >Group
+                                                                                            visit
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group"><label
+                                                                                class="form-label"
+                                                                                for="visit-from">Visit from</label>
+                                                                            <div class="form-control-wrap">
+                                                                                <input type="text"
+                                                                                    class="form-control date-picker"
+                                                                                    id="visit-from" name="visit-from"
+                                                                                    placeholder="mm/dd/yyyy" required>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group"><label
+                                                                                class="form-label" for="visit-to">visit
+                                                                                to</label>
+                                                                            <div class="form-control-wrap">
+                                                                                <input type="text"
+                                                                                    class="form-control date-picker"
+                                                                                    id="visit-to" name="visit-to"
+                                                                                    placeholder="mm/dd/yyyy" required>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group"><label
+                                                                                class="form-label" for="purpose">Purpose
+                                                                                of
+                                                                                visit</label>
+                                                                            <div class="form-control-wrap">
+                                                                                <textarea
+                                                                                    class="form-control form-control-sm"
+                                                                                    id="purpose" name="purpose"
+                                                                                    placeholder="Write Project Description"
+                                                                                    required></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="nk-wizard-head">
+                                                                <h5>Attachment</h5>
+                                                            </div>
+                                                            <div class="nk-wizard-content">
+                                                                <div class="mb-3">
+                                                                    <label for="formFile" class="form-label">Attach your
+                                                                        organization id</label>
+                                                                    <input class="form-control" accept=".pdf, image/*"
+                                                                        type="file" id="formFile">
+                                                                </div>
+                                                                <div id="extra-visitors-wrapper"></div>
+                                                                <button type="button" id="add-visitor-btn"
+                                                                    class="btn btn-outline-primary mt-3 d-none">
+                                                                    <em class="icon ni ni-plus"></em> Add another
+                                                                    visitor
+                                                                </button>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <%-include('footer.ejs')%>
+                </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="region">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title mb-4">Select Your Country</h5>
+                    <div class="nk-country-region">
+                        <ul class="country-list text-center gy-2">
+                            <li><a href="#" class="country-item"><img src="/images/flags/arg.png" alt=""
+                                        class="country-flag"><span class="country-name">Argentina</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/aus.png" alt=""
+                                        class="country-flag"><span class="country-name">Australia</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/bangladesh.png" alt=""
+                                        class="country-flag"><span class="country-name">Bangladesh</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/canada.png" alt=""
+                                        class="country-flag"><span class="country-name">Canada
+                                        <small>(English)</small></span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/china.png" alt=""
+                                        class="country-flag"><span class="country-name">Centrafricaine</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/china.png" alt=""
+                                        class="country-flag"><span class="country-name">China</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/french.png" alt=""
+                                        class="country-flag"><span class="country-name">France</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/germany.png" alt=""
+                                        class="country-flag"><span class="country-name">Germany</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/iran.png" alt=""
+                                        class="country-flag"><span class="country-name">Iran</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/italy.png" alt=""
+                                        class="country-flag"><span class="country-name">Italy</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/mexico.png" alt=""
+                                        class="country-flag"><span class="country-name">México</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/philipine.png" alt=""
+                                        class="country-flag"><span class="country-name">Philippines</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/portugal.png" alt=""
+                                        class="country-flag"><span class="country-name">Portugal</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/s-africa.png" alt=""
+                                        class="country-flag"><span class="country-name">South Africa</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/spanish.png" alt=""
+                                        class="country-flag"><span class="country-name">Spain</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/switzerland.png" alt=""
+                                        class="country-flag"><span class="country-name">Switzerland</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/uk.png" alt=""
+                                        class="country-flag"><span class="country-name">United Kingdom</span></a></li>
+                            <li><a href="#" class="country-item"><img src="/images/flags/english.png" alt=""
+                                        class="country-flag"><span class="country-name">United State</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-include('right-side.ejs')%>
+        <div class="pmo-lv pmo-dark"><a class="pmo-close" href="#"><em class="ni ni-cross"></em></a><a class="pmo-wrap"
+                target="_blank" href="https://softnio.com/get-early-access/">
+                <div class="pmo-text text-white">Looking for functional script for Investment Platform? Check out <em
+                        class="ni ni-arrow-long-right"></em></div>
+            </a></div><a class="pmo-st pmo-dark" target="_blank" href="https://softnio.com/get-early-access/">
+            <div class="pmo-st-img"><img src="/images/landing/promo-investorm.png" alt="Investorm"></div>
+            <div class="pmo-st-text">Looking for Advanced <br> Investment Platform?</div>
+        </a>
+        <script src="/assets/js/bundlee1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/scriptse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/charts/gd-defaulte1e3.js?ver=3.2.4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                    // If coming from bfcache (Back/Forward cache), reload to enforce revalidation
+                    window.location.reload();
+                }
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $(".date-picker").flatpickr({
+                    dateFormat: "m/d/Y"
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                const selectedDepartmentId = $('#selected-department-id').val();
+
+                $.ajax({
+                    url: '/user/departments',
+                    method: 'GET',
+                    success: function (departments) {
+                        const data = departments.data // Debugging line to check loaded departments
+                        const $select = $('#DepartmentId');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select Department---</option>');
+
+                        data.forEach(function (dept) {
+                            const isSelected = dept.id == selectedDepartmentId ? 'selected' : '';
+                            $select.append(`<option value="${dept.id}" ${isSelected}>${dept.name}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load departments:', error);
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+
+                $('a[href="#next"]').off('click').on('click', async function (e) {
+                    e.preventDefault();
+
+                    const reference_no = localStorage.getItem('reference_no');
+                    console.log('reference_no:', reference_no)
+                    if(reference_no){
+                        await updateInitialRequest(reference_no);
+                        return;
+                    }
+
+                    //return;
+                    const organization = $('#organization').val();
+                    const visitType = $('#visit-type').val();
+                    const visitFrom = $('#visit-from').val();
+                    const visitTo = $('#visit-to').val();
+                    const purpose = $('#purpose').val();
+                    const DepartmentId = $('#DepartmentId').val();
+
+                    // Hide Register button and show loading
+
+                    if (!organization || !visitType || !visitFrom || !visitTo || !purpose || !DepartmentId) {
+                        showToast("Validation Error", "All fields are required.", "text-warning");
+                        return;
+                    }
+                    if (visitFrom > visitTo) {
+                        showToast("Validation Error", "Visit 'from' date cannot be later than 'to' date.", "text-warning");
+                        return;
+                    }
+
+                    // Collect form values manually
+                    const formData = {
+                        organization,
+                        visitType,
+                        visitFrom,
+                        visitTo,
+                        purpose,
+                        DepartmentId
+                    };
+
+                    console.log("Form Data:", formData); // Debugging line to check form data
+                    $.ajax({
+                        type: 'POST',
+                        url: '/requests',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData), // Convert to JSON string
+                        success: function (response) {
+                            console.log('response:', response);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/user/initialrequest',
+                                contentType: 'application/json',
+                                data: JSON.stringify(formData), // Convert to JSON string
+                                success: function (response) {
+                                    localStorage.setItem('reference_no', response.data.reference_no);
+                                    showToast("Success", "Your intiial info has been submitted successfully.", "text-success");
+                                    // Move to next step manually after success
+                                    $('#wizard-02').steps('next');
+                                },
+                                error: function (xhr) {
+                                    let message = "Submission failed. Please try again.";
+                                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                                        message = xhr.responseJSON.message;
+                                    }
+                                    showToast("Error", message, "text-danger");
+                                    return;
+                                },
+                                complete: function () {
+                                    // Revert buttons
+                                    $('#loadingBtn').hide();
+                                    $('#registerBtn').show();
+                                }
+                            });
+                        }, error: function (xhr) {
+                            let message = "Submission failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                        complete: function () {
+                            // Revert buttons
+                            $('#loadingBtn').hide();
+                            $('#registerBtn').show();
+                        }
+                    })
+
+                });
+
+                function showToast(title, body, titleClass) {
+                    const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                    const $toast = $(toastHtml);
+                    $('.toast-container').append($toast);
+                    const toast = new bootstrap.Toast($toast[0]);
+                    toast.show();
+                }
+            });
+
+            async function updateInitialRequest(reference_no) {
+
+                //return;
+                const organization = $('#organization').val();
+                const visitType = $('#visit-type').val();
+                const visitFrom = $('#visit-from').val();
+                const visitTo = $('#visit-to').val();
+                const purpose = $('#purpose').val();
+                const DepartmentId = $('#DepartmentId').val();
+
+                // Hide Register button and show loading
+
+                if (!organization || !visitType || !visitFrom || !visitTo || !purpose || !DepartmentId) {
+                    showToast("Validation Error", "All fields are required.", "text-warning");
+                    return;
+                }
+                if (visitFrom > visitTo) {
+                    showToast("Validation Error", "Visit 'from' date cannot be later than 'to' date.", "text-warning");
+                    return;
+                }
+
+                // Collect form values manually
+                const formData = {
+                    organization,
+                    visitType,
+                    visitFrom,
+                    visitTo,
+                    purpose,
+                    DepartmentId
+                };
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to update initial data.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, Update!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/requests',
+                            contentType: 'application/json',
+                            data: JSON.stringify(formData), // Convert to JSON string
+                            success: function (response) {
+                                $.ajax({
+                                    url: `/user/initialrequest/${reference_no}`,
+                                    method: 'PUT',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify(formData),
+                                    success: function (response) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Successfully!',
+                                            text: 'Initial request updated successfull.',
+                                            timer: 2000,
+                                            showConfirmButton: false
+                                        }).then(() => {
+                                            // window.location.reload();
+                                            localStorage.setItem('reference_no', response.data.reference_no);
+                                            $('#wizard-02').steps('next');
+                                        });
+                                    },
+                                    error: function (xhr) {
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error!',
+                                            text: xhr.responseJSON?.message || 'Failed to Update.',
+                                        });
+                                    }
+                                });
+                            },
+                            error: function (xhr) {
+                                let message = "Submission failed. Please try again.";
+                                if (xhr.responseJSON && xhr.responseJSON.message) {
+                                    message = xhr.responseJSON.message;
+                                }
+                                showToast("Error", message, "text-danger");
+                                return;
+                            },
+                            complete: function () {
+                                // Revert buttons
+                                $('#loadingBtn').hide();
+                                $('#registerBtn').show();
+                            }
+                        })
+                    }
+                });
+            }
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                // When visit type changes
+                $('#visit-type').on('change', function () {
+                    const isGroup = $(this).val() === 'group';
+                    console.log("Visit type changed to:", isGroup ? "Group" : "Individual");
+                    // Show or hide the add button
+                    $('#add-visitor-btn').toggleClass('d-none', !isGroup);
+
+                    // Clear previously added visitors if switching from group to individual
+                    if (!isGroup) {
+                        $('#extra-visitors-wrapper').empty();
+                    }
+                });
+
+                // ✅ Trigger the change manually to handle pre-filled value
+                $('#visit-type').trigger('change');
+
+                // On add visitor button click
+                $('#add-visitor-btn').on('click', function () {
+                    $('#extra-visitors-wrapper').append(`
+                <div class="row gy-2 align-items-center visitor-extra mt-3 border p-3 rounded">
+                    <div class="col-12 text-end">
+                        <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-remove-visitor" title="Remove visitor">
+                            <em class="icon ni ni-trash"></em>
+                        </button>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="visitor-name-UNIQUE_ID" class="form-label visually-hidden">First Name</label>
+                        <input type="text" name="visitor-name[]" id="visitor-name-UNIQUE_ID" class="form-control" placeholder="First Name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="visitor-lastname-UNIQUE_ID" class="form-label visually-hidden">Last Name</label>
+                        <input type="text" name="visitor-lastname[]" id="visitor-lastname-UNIQUE_ID" class="form-control" placeholder="Last Name" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="visitor-email-UNIQUE_ID" class="form-label visually-hidden">Email (Optional)</label>
+                        <input type="email" name="visitor-email[]" id="visitor-email-UNIQUE_ID" class="form-control" placeholder="Email (Optional)">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="visitor-phone-UNIQUE_ID" class="form-label visually-hidden">Phone Number (Optional)</label>
+                        <input type="tel" name="visitor-phone[]" id="visitor-phone-UNIQUE_ID" class="form-control" placeholder="Phone Number (Optional)">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="visitor-id-doc-UNIQUE_ID" class="form-label">ID Document (National ID/Passport)</label>
+                        <input type="file" name="visitor-file[]" id="visitor-id-doc-UNIQUE_ID" class="form-control" accept=".pdf,image/*" required>
+                        <small class="form-text text-muted">Accepted: PDF, JPG, PNG. Max size: 5MB.</small>
+                    </div>
+
+                    <input type="hidden" name="participant-db-id[]" value="" id="participant-db-id-UNIQUE_ID"> 
+                </div>
+            `);
+                });
+
+                // Remove visitor row when ❌ is clicked
+                $('#extra-visitors-wrapper').on('click', '.btn-remove-visitor', function () {
+                    $(this).closest('.visitor-extra').remove();
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('a[href="#finish"]').on('click', function (e) {
+                    e.preventDefault();
+
+                    console.log('submit button clicked');
+                    const myname = $('#myname').val();
+                    const myemail = $('#myemail').val();
+                    const myphone = $('#myphone').val();
+                    const mylastname = $('#mylastname').val();
+                    const orgFile = $('#formFile')[0].files[0]; // single default file
+                    const reference_no = localStorage.getItem('reference_no');
+
+                    if (!myname || !myemail || !myphone || !mylastname || !orgFile || !reference_no) {
+                        showToast("Validation Error", "All fields are required, including organization ID.", "text-warning");
+                        return;
+                    }
+                    // Collect form values manually
+                    const formData = new FormData();
+                    formData.append('organizationFile', orgFile); // default file
+                    formData.append('reference_no', reference_no); // default file
+                    formData.append('email', myemail); // default file
+
+                    // Collect all attachments into `otherData`
+                    const otherData = [];
+
+                    // Add default organization ID file as part of otherData
+                    if (!orgFile) {
+                        showToast("Validation Error", "Organization ID attachment is required.", "text-warning");
+                        return;
+                    }
+
+                    const orgFileField = `visitorFiles[0]`;
+                    formData.append(orgFileField, orgFile);
+                    otherData.push({
+                        name: myname,
+                        email: myemail,
+                        lastname: mylastname,
+                        phone: myphone,
+                        fileField: orgFileField
+                    });
+
+                    // Add additional visitor attachments
+                    let fileIndex = 1; // Start from 1 since 0 was used by org file
+                    $('.visitor-extra').each(function () {
+                        const name = $(this).find('input[name="visitor-name[]"]').val();
+                        const email = $(this).find('input[name="visitor-email[]"]').val();
+                        const lastname = $(this).find('input[name="visitor-lastname[]"]').val();
+                        const phone = $(this).find('input[name="visitor-phone[]"]').val();
+                        const fileInput = $(this).find('input[name="visitor-file[]"]')[0];
+                        const file = fileInput?.files?.[0];
+
+                        if (name && file) {
+                            const fileField = `visitorFiles[${fileIndex}]`;
+                            formData.append(fileField, file);
+                            otherData.push({
+                                name: name,
+                                email: email,
+                                lastname: lastname,
+                                phone: phone,
+                                fileField: fileField
+                            });
+                            fileIndex++;
+                        }
+                    });
+
+                    formData.append('otherData', JSON.stringify(otherData));
+
+                    console.log("otherData JSON:", JSON.stringify(otherData, null, 2));
+
+                    console.log("FormData contents:");
+                    for (const [key, value] of formData.entries()) {
+                        if (value instanceof File) {
+                            console.log(`${key}: [File] name="${value.name}", type="${value.type}", size=${value.size} bytes`);
+                        } else {
+                            console.log(`${key}:`, value);
+                        }
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/user/request',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            console.log("Response:", response); // Debugging line to check response
+                            showToast("Success", "Your attachments have been submitted successfully.", "text-success");
+                            $('#wizard-02')[0].reset();
+                            $('#extra-visitors-wrapper').empty();
+                            $('#add-visitor-btn').addClass('d-none');
+                            console.log("Response1:", response);
+                            localStorage.removeItem('reference_no');
+                            window.location.href = '/Home';
+                        },
+                        error: function (xhr) {
+                            let message = "Submission failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                        complete: function () {
+                            // Revert buttons
+                            $('#loadingBtn').hide();
+                            $('#registerBtn').show();
+                        }
+                    });
+                });
+
+                function showToast(title, body, titleClass) {
+                    const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                    const $toast = $(toastHtml);
+                    $('.toast-container').append($toast);
+                    const toast = new bootstrap.Toast($toast[0]);
+                    toast.show();
+                }
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#logout-link').on('click', function (e) {
+                    e.preventDefault();
+
+                    console.log('reached')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/auth/logout',
+                        contentType: 'application/json',
+                        success: function (response) {
+                            showToast("Success", "Logged out in successfully", "text-success");
+                            window.location.href = '/login'
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                    });
+                })
+
+                function showToast(title, body, titleClass) {
+                    const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                    const $toast = $(toastHtml);
+                    $('.toast-container').append($toast);
+                    const toast = new bootstrap.Toast($toast[0]);
+                    toast.show();
+                }
+            })
+        </script>
+        <script>
+            $(document).ready(function () {
+                const currentPath = window.location.pathname;
+                console.log("Current Path:", currentPath);
+
+                $(".nk-menu-link").each(function () {
+                    const linkPath = new URL(this.href).pathname;
+                    console.log("Link Path:", linkPath);
+                    if (linkPath === currentPath) {
+                        $(this).addClass("active");
+                    } else {
+                        $(this).removeClass("active");
+                    }
+                });
+            });
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>Report | Business Licence Reports</title>
+    <link rel="stylesheet" href="/assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/themee1e3.css?ver=3.2.4">
+    <link rel="stylesheet" href="/assets/css/style1.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="nk-block-head nk-block-head-sm">
+                                            <div class="nk-block-between">
+                                                <div class="nk-block-head-content">
+                                                    <h3 class="nk-block-title page-title">BRELA REPORTS</h3>
+                                                    <div class="nk-block-des text-soft">
+                                                        <p>Welcome to BRELA REPORTS</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="nk-block nk-block-lg">
+                                            <div class="card card-bordered card-preview mb-3">
+                                                <div class="card-inner">
+                                                    <div class="preview-block">
+                                                        <div class="row gy-4">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="Sector">Sector</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="SectorId"
+                                                                                onchange="getCategories()" name="Sector"
+                                                                                required>
+                                                                                <option value="">---Select
+                                                                                    Sector---</option>
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="DepartmentId">Category</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required"
+                                                                                onchange="getBusiness()" id="CategoryId"
+                                                                                name="CategoryId" required>
+                                                                                <option value="">---Select
+                                                                                    Category---</option>
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="bussinessType">Line
+                                                                        of
+                                                                        business</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="bussinessType"
+                                                                                name="bussinessType" required>
+                                                                                <option value="">---Select
+                                                                                    type---</option>
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="DepartmentId">Region</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required"
+                                                                                onchange="getDistrict()" id="RegionId"
+                                                                                name="RegionId" required>
+                                                                                <option value="">---Select
+                                                                                    Region---</option>
+                                                                                <%regions.forEach((region)=> {
+                                                                                    %>
+                                                                                    <option
+                                                                                        value="<%= region.RegionCode %>">
+                                                                                        <%= region.RegionName %>
+                                                                                    </option>
+                                                                                    <% }) %>
+                                                                                        <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="DepartmentId">District</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="DistrictId"
+                                                                                name="DistrictId" required>
+                                                                                <option value="">---Select
+                                                                                    District---</option>
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="approver">Approver</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="approverId"
+                                                                                name="approver" required>
+                                                                                <option value="">---Select
+                                                                                    Approver---</option>
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="DepartmentId">Issuer</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="IssuerId"
+                                                                                name="IssuerId" required>
+                                                                                <option value="">---Select
+                                                                                    Issuer---</option>
+                                                                                <%issuer.forEach((issuer)=> {
+                                                                                    %>
+                                                                                    <option
+                                                                                        value="<%= issuer.IssuingAuthorityId %>">
+                                                                                        <%= issuer.Name %>
+                                                                                    </option>
+                                                                                    <% }) %>
+                                                                                        <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="status">Status</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="statusId"
+                                                                                name="status" required>
+                                                                                <option value="">---Select
+                                                                                    Action---</option>
+
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="entity">Entity
+                                                                        Type</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="entityId"
+                                                                                name="entity" required>
+                                                                                <option value="">---Select
+                                                                                    Entity Type---</option>
+                                                                                <%entity.forEach((e)=> {
+                                                                                    %>
+                                                                                    <option
+                                                                                        value="<%= e.OwnerSubTypeId %>">
+                                                                                        <%= e.OwnerSubTypeName %>
+                                                                                    </option>
+                                                                                    <% }) %>
+                                                                                        <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label"
+                                                                        for="currency">Currency</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                data-msg="Required" id="currencyId"
+                                                                                name="currency" required>
+                                                                                <option value="">---Select
+                                                                                    Currency---</option>
+                                                                                <option value="TZS">TZS</option>
+                                                                                <option value="USD">USD</option>
+                                                                                <!-- Options will be inserted dynamically -->
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group"><label class="form-label"
+                                                                        for="controlno">Control number</label>
+                                                                    <div class="form-control-wrap"><input type="number"
+                                                                            class="form-control" id="controlno" "
+                                                                                placeholder=" control number">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group"><label class="form-label"
+                                                                        for="price">Issue from</label>
+                                                                    <div class="form-control-wrap"> <input type="date"
+                                                                            class="form-control" id="issuedFrom"
+                                                                            name="issuedFrom" placeholder="YYYY-MM-DD">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="issueTo">Issue
+                                                                        to</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <input type="date" class="form-control"
+                                                                            id="issuedTo" placeholder="yyyy-mm-dd">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <button type="button" id="filterButton"
+                                                                        class="btn btn-primary mt-2">Apply
+                                                                        Filter</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="js-preloader" style="display: none;"><div class="loading-animation tri-ring"></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card card-bordered card-preview">
+                                                <div class="card-inner">
+                                                    <table id="requestsTable" class=" nk-tb-list nk-tb-ulist">
+                                                        <thead>
+                                                            <tr class="nk-tb-item nk-tb-head">
+                                                                <th class="nk-tb-col"><span class="sub-text">SNO</span>
+                                                                </th>
+                                                                <th class="nk-tb-col"><span class="sub-text">Application
+                                                                        No</span></th>
+                                                                <th class="nk-tb-col"><span class="sub-text">Licence
+                                                                        No</span></th>
+                                                                <th class="nk-tb-col"><span class="sub-text">Owner
+                                                                        Name</span></th>
+                                                                <th class="nk-tb-col"><span
+                                                                        class="sub-text">Email</span></th>
+                                                                <th class="nk-tb-col"><span class="sub-text">Issued
+                                                                        Date</span></th>
+                                                                <th class="nk-tb-col"><span class="sub-text">Expire
+                                                                        Date</span></th>
+                                                                <th class="nk-tb-col"><span
+                                                                        class="sub-text">Action</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <tr class="nk-tb-item">
+                                                                <td class="nk-tb-col">
+                                                                    1
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    ibratimoth
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    123
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    2/2/2025
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    3/3/2025
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    NIDC
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    R/D
+                                                                </td>
+                                                                <td class="nk-tb-col">
+                                                                    <span class="tb-status text-success ">
+                                                                        approved
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <%-include('footer.ejs')%>
+                </div>
+        </div>
+    </div>
+
+    <%-include('right-side.ejs')%>
+        <div class="pmo-lv pmo-dark"><a class="pmo-close" href="#"><em class="ni ni-cross"></em></a><a class="pmo-wrap"
+                target="_blank" href="https://softnio.com/get-early-access/">
+                <div class="pmo-text text-white">Looking for functional script for Investment Platform? Check out <em
+                        class="ni ni-arrow-long-right"></em></div>
+            </a></div><a class="pmo-st pmo-dark" target="_blank" href="https://softnio.com/get-early-access/">
+            <div class="pmo-st-img"><img src="/images/landing/promo-investorm.png" alt="Investorm"></div>
+            <div class="pmo-st-text">Looking for Advanced <br> Investment Platform?</div>
+        </a>
+        <script src="/assets/js/bundlee1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/scriptse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/charts/gd-defaulte1e3.js?ver=3.2.4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="/assets/js/dashboard.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $(".date-picker").flatpickr({
+                    dateFormat: "Y-m-d" // This is 2025-07-06 format
+                });
+            });
+
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: '/user/sectors',
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data // Debugging line to check loaded departments
+                        const $select = $('#SectorId');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select Sector---</option>');
+
+                        data.forEach(function (sect) {
+                            $select.append(`<option value="${sect.id}" >${sect.SectorName}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load departments:', error);
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: '/user/approver',
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data // Debugging line to check loaded departments
+                        console.log('data app:', data);
+                        const $select = $('#approverId');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select approver---</option>');
+
+                        data.forEach(function (appr) {
+                            $select.append(`<option value="${appr.Id}" >${appr.FirstName} ${appr.LastName}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load approver:', error);
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: '/user/status',
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data // Debugging line to check loaded departments
+                        const $select = $('#statusId');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select status---</option>');
+
+                        data.forEach(function (stat) {
+                            $select.append(`<option value="${stat.id}" >${stat.StatusName}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load status:', error);
+                    }
+                });
+            });
+
+            function getCategories() {
+                const SectorId = $('#SectorId').val();
+                console.log('sectorid:', SectorId)
+                $.ajax({
+                    url: `/user/categories/${SectorId}`,
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data // Debugging line to check loaded departments
+                        const $select = $('#CategoryId');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select Categories---</option>');
+
+                        data.forEach(function (cat) {
+                            $select.append(`<option value="${cat.Id}">${cat.BusinessCategoryName}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load Categories:', error);
+                    }
+                });
+            }
+
+            function getBusiness() {
+                const CategoryId = $('#CategoryId').val();
+                console.log('CategoryId:', CategoryId)
+                $.ajax({
+                    url: `/user/businesstype/${CategoryId}`,
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data // Debugging line to check loaded departments
+                        const $select = $('#bussinessType');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select bussinessType---</option>');
+
+                        data.forEach(function (bus) {
+                            $select.append(`<option value="${bus.BusinessTypeId}">${bus.BusinessTypeName}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load bussinessType:', error);
+                    }
+                });
+            }
+
+            function getDistrict() {
+                const RegionId = $('#RegionId').val();
+                console.log('RegionId:', RegionId)
+                $.ajax({
+                    url: `/user/district/${RegionId}`,
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data // Debugging line to check loaded departments
+                        const $select = $('#DistrictId');
+                        $select.empty(); // Clear current options
+                        $select.append('<option value="">---Select District---</option>');
+
+                        data.forEach(function (dis) {
+                            $select.append(`<option value="${dis.DistrictCode}">${dis.DistrictName}</option>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load District:', error);
+                    }
+                });
+            }
+
+
+            $(document).ready(function () {
+
+                var requestsTable = null;
+
+                requestsTable = $('#requestsTable').DataTable({
+                    "paging": true,
+                    "ordering": true,
+                    "info": true,
+                    "searching": true,
+                    "destroy": true,
+                    "columns": [
+
+                        { "orderable": false, "searchable": false },
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        { "orderable": false, "searchable": false }
+                    ]
+                });
+
+                function fetchAndPopulateTable(filters) {
+                    let queryString = Object.keys(filters)
+                        .filter(key => filters[key] !== null && filters[key] !== undefined && filters[key] !== '')
+                        .map(key => `${key}=${encodeURIComponent(filters[key])}`)
+                        .join('&');
+
+                    const filterRoute = `/user/licences?${queryString}`;
+
+                    $.ajax({
+                        url: filterRoute,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success. Response received for manual population:", response);
+
+                            if (requestsTable) {
+                                requestsTable.destroy();
+                                requestsTable = null;
+                            }
+
+                            const $tableBody = $('#requestsTable tbody');
+                            $tableBody.empty();
+                            $('.js-preloader').hide()
+
+                            if (response && response.data && Array.isArray(response.data) && response.data.length > 0) {
+                                let tableBodyHtml = '';
+
+                                response.data.forEach(function (item, index) {
+                                    const issuedDate = item.DateIssued ? new Date(item.DateIssued).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
+                                    const expireDate = item.ExpireDate ? new Date(item.ExpireDate).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
+
+                                    let statusText = 'Unknown';
+                                    let statusClass = 'text-info';
+                                    switch (String(item.LicenceStatusId)) {
+                                        case '1': statusText = 'Active'; statusClass = 'text-success'; break;
+                                        case '2': statusText = 'Expired'; statusClass = 'text-warning'; break;
+                                        case '3': statusText = 'Canceled'; statusClass = 'text-danger'; break;
+                                        case '4': statusText = 'Inactive'; statusClass = 'text-warning'; break;
+                                        case '5': statusText = 'Pending'; statusClass = 'text-secondary'; break;
+                                        case '6': statusText = 'CancelFormer'; statusClass = 'text-danger'; break;
+                                        case '7': statusText = 'Expired'; statusClass = 'text-warning'; break;
+                                    }
+
+                                    tableBodyHtml += `
+                            <tr class="nk-tb-item">
+                                <td class="nk-tb-col">${index + 1}</td> <td class="nk-tb-col">${item.TrackingNo || 'N/A'}</td> 
+                                <td class="nk-tb-col">${item.BLNumber || 'N/A'}</td> 
+                                <td class="nk-tb-col">${item.EntityName || 'N/A'}</td>
+                                 <td class="nk-tb-col">${item.Email || 'N/'}</td> 
+                                 <td class="nk-tb-col">${issuedDate || 'N/A'}</td> 
+                                 <td class="nk-tb-col">${expireDate || 'N/A'}</td> 
+                                 <td class="nk-tb-col">
+                                    <span class="badge ${statusClass}">${statusText}</span>
+                                </td>
+                            </tr>
+                        `;
+                                });
+
+                                $tableBody.html(tableBodyHtml);
+
+                                requestsTable = $('#requestsTable').DataTable({
+                                    "paging": true,
+                                    "ordering": true,
+                                    "info": true,
+                                    "searching": true,
+                                    "destroy": true,
+                                    "columns": [
+                                        { "orderable": false, "searchable": false },
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        { "orderable": false, "searchable": false }
+                                    ]
+                                });
+                                console.log("Custom rows populated and DataTable re-initialized successfully.");
+
+                            } else {
+                                $tableBody.empty();
+                                $('.js-preloader').hide()
+                                requestsTable = $('#requestsTable').DataTable({
+                                    "paging": true,
+                                    "ordering": true,
+                                    "info": true,
+                                    "searching": false,
+                                    "destroy": true,
+                                    "columns": [
+                                        { "orderable": false, "searchable": false },
+                                        null, null, null, null, null, null, null
+                                    ]
+                                });
+                                console.log("No data found for the selected filters. Table cleared.");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            $('.js-preloader').hide()
+                            console.error("Error fetching filtered data:", error, xhr, status);
+                            alert("Failed to fetch data. Please try again.");
+                            if (requestsTable) { requestsTable.clear().draw(); }
+                            else {
+                                requestsTable = $('#requestsTable').DataTable({
+                                    "paging": true, "ordering": true, "info": true, "searching": false, "destroy": true,
+                                    "columns": [
+                                        { "orderable": false, "searchable": false },
+                                        null, null, null, null, null, null, null
+                                    ]
+                                });
+                            }
+                        }
+                    });
+                }
+
+                $('#filterButton').on('click', function () {
+
+                    $('.js-preloader').show()
+                    const filters = {
+                        sectorId: $('#SectorId').val(),
+                        categoryId: $('#CategoryId').val(),
+                        businessTypeId: $('#bussinessType').val(),
+                        regionId: $('#RegionId').val(),
+                        districtId: $('#DistrictId').val(),
+                        ApproverId: $('#approverId').val(),
+                        issuerId: $('#IssuerId').val(),
+                        controlno: $('#controlno').val(),
+                        issuedFrom: $('#issuedFrom').val(),
+                        issuedTo: $('#issuedTo').val(),
+                        currencyId: $('#currencyId').val(),
+                        statusId: $('#statusId').val(),
+                        entity: $('#entityId').val()
+                    };
+
+                    for (const key in filters) {
+                        if (filters[key] === null || filters[key] === '') {
+                            delete filters[key];
+                        }
+                    }
+                    console.log("Filters to send:", filters);
+                    fetchAndPopulateTable(filters);
+                });
+
+
+                console.log("Document ready. Triggering initial data fetch.");
+                fetchAndPopulateTable({});
+            });
+        </script>
+</body>
+
+</html>

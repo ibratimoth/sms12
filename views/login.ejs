@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>Login | School Management System</title>
+    <link rel="stylesheet" href="/assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/themee1e3.css?ver=3.2.4">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .sgn {
+            background-color: #035994 !important;
+            outline: none !important;
+            border: none !important;
+        }
+    </style>
+</head>
+
+<body class="nk-body npc-general pg-auth" style="background-color: #f7f7f7;">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <div class="nk-wrap nk-wrap-nosidebar">
+                <div class="nk-content ">
+                    <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
+                        <div class="brand-logo pb-4 text-center"><a href="" class="logo-link"><img
+                                    class="logo-light logo-img logo-img-lg" src="/images/coat.png"
+                                    srcset="/images/coat.png 3x" alt="logo"><img class="logo-dark logo-img logo-img-lg"
+                                    src="/images/coat.png" srcset="/images/coat.png 3x" alt="logo-dark"></a></div>
+
+                        <div class="text-center mb-3">
+                            <h5></h5>
+                        </div>
+                        <div class="card card-bordered">
+                            <div class="card-inner card-inner-sm">
+                                <div class="nk-block-head">
+                                    <div class="nk-block-head-content">
+                                        <h5 class="nk-block-title">Welcome to School Management System</h5>
+                                        <div class="nk-block-des">
+                                            <p>Enter your credentials to access your account.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form action="#" method="post" class="form-validate" id="requestorForm">
+
+
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <div class="form-icon form-icon-left">
+                                                <em class="icon ni ni-mail"></em>
+                                            </div><input type="text" class="form-control " id="email"
+                                                placeholder="Enter your office email address eg. hh@nidc.co.tz"
+                                                name="email" autocomplete="off" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <div class="form-control-wrap"><a href="#"
+                                                class="form-icon form-icon-right passcode-switch lg"
+                                                data-target="password"><em
+                                                    class="passcode-icon icon-show icon ni ni-eye"></em><em
+                                                    class="passcode-icon icon-hide icon ni ni-eye-off"></em></a><input
+                                                type="password" class="form-control " id="password" name="password"
+                                                placeholder="Enter your password" autocomplete="new-password" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"><button class="btn btn-lg btn-primary btn-block sgn"
+                                            id="loginBtn">Login</button></div>
+                                    <button class="btn btn-lg btn-primary btn-block sgn" type="button" id="loadingBtn"
+                                        style="display: none;" disabled> <span class="spinner-border spinner-border-sm"
+                                            role="status" aria-hidden="true"></span> <span>Loading...</span> </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                    <%-include('footer1')%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/bundlee1e3.js?ver=3.2.4"></script>
+    <script src="/assets/js/scriptse1e3.js?ver=3.2.4"></script>
+    <script src="/assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+    <script src="/assets/js/login.js"></script>
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+        $(window).on('pageshow', function () {
+            $('#email').val('');
+            $('#password').val('');
+        });
+
+        $(document).ready(function () {
+            $('#requestorForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const email = $('#email').val();
+                const password = $('#password').val();
+                // Hide Register button and show loading
+
+                if (!email|| !password) {
+                    showToast("Validation Error", "All fields are required.", "text-warning");
+                    return;
+                }
+
+                $('#loginBtn').hide();
+                $('#loadingBtn').show();
+                // Serialize form data
+                // Collect form values manually
+                const formData = {
+                    email,
+                    password
+                };
+                localStorage.removeItem('reference_no');
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/login',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData), // Convert to JSON string
+                    success: function (response) {
+                        console.log('Login successful:',);
+                        // "Security"
+                        showToast("Success", "Logged in successfully", "text-success")
+                        $('#email').val('');
+                        $('#password').val('');
+                        
+                        window.location.href = '/api/Home';
+                        return;
+                    },
+                    error: function (xhr) {
+                        let message = "Submission failed. Please try again.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        showToast("Error", message, "text-danger");
+                        return;
+                    },
+                    complete: function () {
+                        // Revert buttons
+                        $('#loadingBtn').hide();
+                        $('#loginBtn').show();
+                    }
+                });
+            });
+
+            function showToast(title, body, titleClass) {
+                const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                const $toast = $(toastHtml);
+                $('.toast-container').append($toast);
+                const toast = new bootstrap.Toast($toast[0]);
+                toast.show();
+            }
+        });
+    </script>
+
+</html>

@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>Academic | School Information system</title>
+    <link rel="stylesheet" href="/assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/themee1e3.css?ver=3.2.4">
+    <link rel="stylesheet" href="/assets/css/style1.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .spinner-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            /* Ensures it's above other content */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(21, 21, 41, 0.5);
+            color: #0c385f;
+            /* Optional: background shade */
+        }
+    </style>
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="nk-block-head nk-block-head-sm">
+                                            <div class="nk-block-between">
+                                                <div class="nk-block-head-content">
+                                                    <h3 class="nk-block-title page-title">SCHOOL MANAGEMENT SYSTEM</h3>
+                                                    <div class="nk-block-des text-soft">
+                                                        <p>Welcome to SMS</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="nk-block nk-block-lg">
+                                            <div class="card card-bordered card-preview mb-3">
+                                                <div class="card-inner">
+                                                    <div class="preview-block">
+                                                        <div class="row gy-4">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="EntityId">Academic
+                                                                        Entities</label>
+                                                                    <div class="form-control-wrap">
+                                                                        <div class="form-control-select">
+                                                                            <select class="form-control required"
+                                                                                id="EntityId" name="Sector" required>
+                                                                                <option value="">---Select academic
+                                                                                    entity---</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="js-preloader" style="display: none;">
+                                                                <div class="loading-animation tri-ring"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card card-bordered card-preview">
+                                                <div class="card-inner">
+
+                                                    <button id="addEntityBtn" class="btn btn-primary mb-3"
+                                                        style="display:none;"></button>
+                                                    <table id="requestsTable" class="datatable-init-export nowrap table"
+                                                        data-export-title="Export">
+                                                        <thead></thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <div id="team-members-spinner" class="spinner-container" style="display:none;">
+                            <div class="d-flex justify-content-center align-items-center vh-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+                                    preserveAspectRatio="xMidYMid" width="200" height="200"
+                                    style="shape-rendering: auto; display: block; background: transparent;"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <circle stroke-linecap="round" fill="none"
+                                            stroke-dasharray="50.26548245743669 50.26548245743669" stroke="#035994"
+                                            stroke-width="8" r="32" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <circle stroke-linecap="round" fill="none" stroke-dashoffset="36.12831551628262"
+                                            stroke-dasharray="36.12831551628262 36.12831551628262" stroke="#5b9573"
+                                            stroke-width="8" r="23" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;-360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <g></g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <%-include('footer.ejs')%>
+                </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" role="dialog" id="addStaffModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Staff</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Staff
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="form_four_index_no"> Form
+                                            four index no</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="form_four_index_no" placeholder="Enter your form four index number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="first-name"> First
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="first_name" placeholder="Enter your first name"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="last-name"> Last
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="last_name" placeholder="Enter your last name"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="email"> email</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="email" placeholder="Enter your email"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="phone"> phone</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="mobile_number" placeholder="Enter your phone number"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="phone"> date of birth</label>
+                                        <div class="form-control-wrap"><input type="date" class="form-control" id="dob"
+                                                placeholder="Enter your date of birth"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="password"> Password</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="password" placeholder="Enter strong password e.g. Abc123!"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="gender">Gender</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="gender">
+                                                <option value="">---select gender---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="multiple_roles">Assign Roles</label>
+                                        <div class="form-control-wrap">
+                                            <select id="multiple_roles" class="form-select" multiple="multiple">
+                                                <!-- Keep this empty option for placeholder -->
+                                                <option value="" disabled></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label">Is Disabled</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="isDisabled">
+                                                <option value="">---select answer---</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="disability_input" style="display: none;">
+                                    <div class="form-group"><label class="form-label">Disability</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="disability">
+                                                <option value="">---select disability---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-staff">Create Staff</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editStaffModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Staff</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Staff
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="edit_form_four_index_no">
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_form_four_index_no">
+                                            Form
+                                            four index no</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_form_four_index_no" name="form_four_index_no"
+                                                placeholder="Enter your form four index number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="staff_ID" name="staff_ID">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_first_name"> First
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_first_name" name="first_name"
+                                                placeholder="Enter your first name"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_last_name"> Last
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_last_name" name="last_name" placeholder="Enter your last name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_email"> email</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_email" name="email" placeholder="Enter your email"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_mobile_number">
+                                            phone</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_mobile_number" name="mobile_number"
+                                                placeholder="Enter your phone number"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_dob"> date of
+                                            birth</label>
+                                        <div class="form-control-wrap"><input type="date" class="form-control"
+                                                id="edit_dob" name="dob" placeholder="Enter your date of birth"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_password">
+                                            Password</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_password" placeholder="Enter strong password e.g. Abc123!">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_gender">Gender</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_gender" name="gender_id">
+                                                <option value="">---select gender---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="edit_multiple_roles">Assign Roles</label>
+                                        <div class="form-control-wrap">
+                                            <select id="edit_multiple_roles" class="form-select" multiple="multiple">
+                                                <!-- Keep this empty option for placeholder -->
+                                                <option value="" disabled></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label">Is Disabled</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_isDisabled" name="isDisabled">
+                                                <option value="">---select answer---</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="edit_disability_input" style="display: none;">
+                                    <div class="form-group"><label class="form-label">Disability</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_disability" name="disability_id">
+                                                <option value="">---select disability---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-staff">edit Staff</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="addRoleModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Role</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Role
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="role"> Role</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control" id="role"
+                                                placeholder="Enter role">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Permissions</label>
+                                        <div id="permissions-container" class="row">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-role">Create role</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editRoleModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Role</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Role
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="role"> Role</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_role" placeholder="Enter role" name="role">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Permissions</label>
+                                        <div id="edit-permissions-container" class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="role_ID" name="role_ID">
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-role">Edit role</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="addDesignationModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Designation</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Designation
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="designation"> name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="designation_name" placeholder="Enter designation">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label">Staff type</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="staff_type">
+                                                <option value="">---select staff type---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-designation">Create Designation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editDesignationModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Designation</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Designation
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="designation"> name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_designation_name" placeholder="Enter designation"
+                                                name="designation">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="designation_ID" name="designation_ID">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label">Staff type</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_staff_type" name="staff_type">
+                                                <option value="">---select staff type---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-designation">Edit Designation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="addTypeModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Type</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Type
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="type"> name</label>
+                                        <div class="type"><input type="text" class="form-control" id="type_name"
+                                                placeholder="Enter staff type">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-type">Create type</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editTypeModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Type</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Type
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="type"> name</label>
+                                        <div class="type"><input type="text" class="form-control" id="edit_type_name"
+                                                placeholder="Enter staff type" name="type">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="type_ID" name="type_ID">
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-type">Edit type</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="addDisabilityModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Disability</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Disability
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="disability"> name</label>
+                                        <div class="type"><input type="text" class="form-control" id="disability_name"
+                                                placeholder="Enter disability">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-disability">Create Disability</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editDisabilityModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Disability</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Disability
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="disability"> name</label>
+                                        <div class="type"><input type="text" class="form-control"
+                                                id="edit_disability_name" placeholder="Enter disability"
+                                                name="disability">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="disability_ID" name="disability_ID">
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-disability">Edit Disability</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%-include('right-side.ejs')%>
+
+        <script src="/assets/js/bundlee1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/scriptse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/charts/gd-defaulte1e3.js?ver=3.2.4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="/assets/js/dashboard.js"></script>
+        <script src="../../assets/js/libs/datatable-btnse1e3.js?ver=3.2.4"></script>
+
+        <script>
+            let requestsTable = null;
+            $(document).ready(function () {
+                $(".date-picker").flatpickr({
+                    dateFormat: "Y-m-d"
+                });
+            });
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+
+                    window.location.reload();
+                }
+            });
+
+            $(document).ready(function () {
+                $('#logout-link').on('click', function (e) {
+                    e.preventDefault();
+
+                    console.log('reached')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/logout',
+                        contentType: 'application/json',
+                        success: function (response) {
+                            showToast("Success", "Logged out in successfully", "text-success");
+                            window.location.href = '/'
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                    });
+                })
+
+                function showToast(title, body, titleClass) {
+                    const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                    const $toast = $(toastHtml);
+                    $('.toast-container').append($toast);
+                    const toast = new bootstrap.Toast($toast[0]);
+                    toast.show();
+                }
+            })
+
+            $(document).ready(async function () {
+                $('#gender').select2({
+                    placeholder: "---select gender---",
+                    allowClear: true
+                });
+
+                $('#isDisabled').select2({
+                    placeholder: "---select answer---",
+                    allowClear: true
+                });
+
+
+                $('#disability').select2({
+                    placeholder: "---select disability type---",
+                    allowClear: true
+                });
+
+                $('#multiple_roles').select2({
+                    placeholder: '--- select roles ---',
+                    allowClear: true,
+                    width: '100%',
+                    dropdownParent: $('#addStaffModal')
+                });
+
+                $('#staff_type').select2({
+                    placeholder: "---select staff type---",
+                    allowClear: true
+                });
+
+
+                $('#isDisabled').on('change', function () {
+                    const answer = $(this).val();
+                    console.log('changed to:', answer);
+
+                    if (answer === "yes") {
+                        $('#disability_input').show();
+                    } else {
+                        $('#disability_input').hide();
+                    }
+                });
+
+                await loadGenders();
+                await loadDisabilities();
+                await loadStaffTypes();
+                await loadEditGenders();
+                await loadRoles();
+
+                async function loadGenders(selectedGenderId = null) {
+                    $.ajax({
+                        url: '/api/gender',
+                        method: 'GET',
+                        success: function (response) {
+                            const genders = response.data;
+                            const $select = $('#gender');
+                            $select.empty();
+                            $select.append('<option value="">---Select gender---</option>');
+
+                            genders.forEach(function (gen) {
+                                const isSelected = gen.id === selectedGenderId ? 'selected' : '';
+                                $select.append(`<option value="${gen.id}" ${isSelected}>${gen.name}</option>`);
+                            });
+
+                            $select.select2({
+                                placeholder: "---Select gender---",
+                                dropdownParent: $('#addStaffModal')
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Failed to load gender:', error);
+                        }
+                    });
+                };
+
+                async function loadRoles(selectedRoleId = null) {
+                    $.ajax({
+                        url: '/api/role',
+                        method: 'GET',
+                        success: function (response) {
+                            const roles = response.data;
+                            const $select = $('#multiple_roles');
+                            $select.empty();
+                            $select.append('<option value="">---Select roles---</option>');
+
+                            roles.forEach(function (r) {
+                                const isSelected = r.id === selectedRoleId ? 'selected' : '';
+                                $select.append(`<option value="${r.id}" ${isSelected}>${r.name}</option>`);
+                            });
+
+                            $select.select2({
+                                placeholder: "---Select roles---",
+                                dropdownParent: $('#addStaffModal')
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Failed to load role:', error);
+                        }
+                    });
+                };
+
+                async function loadDisabilities(selectedDisabilityId = null) {
+                    $.ajax({
+                        url: '/api/disability',
+                        method: 'GET',
+                        success: function (response) {
+                            const disabilities = response.data;
+                            const $select = $('#disability');
+                            $select.empty();
+                            $select.append('<option value="">---Select disability---</option>');
+
+                            disabilities.forEach(function (dis) {
+                                const isSelected = dis.id === selectedDisabilityId ? 'selected' : '';
+                                $select.append(`<option value="${dis.id}" ${isSelected}>${dis.name}</option>`);
+                            });
+
+                            $select.select2({
+                                placeholder: "---Select disability---",
+                                dropdownParent: $('#addStaffModal')
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Failed to load disability:', error);
+                        }
+                    });
+                };
+
+                async function loadStaffTypes(selectedStaffTypeId = null) {
+                    $.ajax({
+                        url: '/api/type',
+                        method: 'GET',
+                        success: function (response) {
+                            const types = response.data;
+                            const $select = $('#staff_type');
+                            $select.empty();
+                            $select.append('<option value="">---Select staff type---</option>');
+
+                            types.forEach(function (t) {
+                                const isSelected = t.id === selectedStaffTypeId ? 'selected' : '';
+                                $select.append(`<option value="${t.id}" ${isSelected}>${t.name}</option>`);
+                            });
+
+                            $select.select2({
+                                placeholder: "---Select staff type---",
+                                dropdownParent: $('#addDesignationModal')
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Failed to load staff type:', error);
+                        }
+                    });
+                };
+
+                $('#create-staff').on('click', function (e) {
+                    e.preventDefault();
+
+                    const first_name = $('#first_name').val();
+                    const last_name = $('#last_name').val();
+                    const form_four_index_no = $('#form_four_index_no').val();
+                    const email = $('#email').val();
+                    const mobile_number = $('#mobile_number').val();
+                    const password = $('#password').val();
+                    const gender_id = $('#gender').val();
+                    const disability_id = $('#disability').val() || null;
+                    const dob = $('#dob').val();
+
+                    if (!first_name || !last_name || !email || !password || !gender_id || !form_four_index_no || !mobile_number || !dob) {
+                        Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                        return;
+                    }
+
+                    const formData = { first_name, last_name, email, password, gender_id, form_four_index_no, mobile_number, disability_id, dob };
+                    $('#team-members-spinner').show();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/staff',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+                            const staffId = response.data.id;
+
+                            if (requestsTable && response.data) {
+                                requestsTable.row.add(response.data).draw(false);
+                            }
+
+                            const selectedRoleIds = $('#multiple_roles').val() || [];
+
+                            console.log('selectedRoles:', selectedRoleIds);
+
+                            $.ajax({
+                                type: 'POST',
+                                url: `/api/staff/${staffId}/role`,
+                                contentType: 'application/json',
+                                data: JSON.stringify({ RoleIds: selectedRoleIds }),
+                                success: function () {
+                                    $('#team-members-spinner').hide();
+                                    $('#addStaffModal').modal('hide');
+
+                                    $('#first_name, #last_name, #email, #password, #gender, #mobile_number, #disability, #dob').val('');
+                                    $('#multiple_roles').val(null).trigger('change');
+
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Created!',
+                                        text: 'Staff and roles assigned successfully.',
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    })
+                                },
+                                error: function (xhr) {
+                                    Swal.fire('Error', 'Staff created but failed to assign roles', 'error');
+                                    $('#team-members-spinner').hide();
+                                }
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+
+                            Swal.fire('Error', message, 'error');
+                            $('#team-members-spinner').hide();
+                        }
+                    });
+                });
+
+                $('#create-role').on('click', function (e) {
+                    e.preventDefault();
+
+                    const name = $('#role').val();
+                    const selectedPermissionIds = [];
+                    $('.permission-checkbox:checked').each(function () {
+                        selectedPermissionIds.push($(this).val());
+                    });
+
+
+                    if (!name) {
+                        showToast("Validation Error", "Role name is required.", "text-warning");
+                        return;
+                    }
+                    if (selectedPermissionIds.length === 0) {
+                        showToast("Validation Error", "Please select at least one permission.", "text-warning");
+                        return;
+                    }
+                    console.log('selected permissions:', selectedPermissionIds)
+
+                    const formData = { name };
+                    $('#team-members-spinner').show();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/role',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+                            const createdRoleId = response.data?.id;
+                            if (!createdRoleId) {
+                                showToast("Error", "Role created but ID not returned.", "text-danger");
+                                return;
+                            }
+
+
+                            $.ajax({
+                                type: 'POST',
+                                url: `/api/role/${createdRoleId}/permission`,
+                                contentType: 'application/json',
+                                data: JSON.stringify({ permissionIds: selectedPermissionIds }),
+                                success: function () {
+                                    $('#addRoleModal').modal('hide');
+                                    $('#role').val('');
+                                    $('#team-members-spinner').hide();
+
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success!',
+                                        text: 'Role and permissions assigned successfully!',
+                                        timer: 2000,
+                                        showConfirmButton: false
+                                    }).then(() => {
+                                        if (requestsTable && response.data) {
+                                            requestsTable.row.add(response.data).draw(false);
+                                        }
+                                    });
+                                },
+                                error: function (xhr) {
+                                    let message = "Failed to assign permissions.";
+                                    if (xhr.responseJSON?.message) {
+                                        message = xhr.responseJSON.message;
+                                        $('#team-members-spinner').hide();
+                                    }
+                                    showToast("Error", message, "text-danger");
+                                    $('#team-members-spinner').hide();
+                                }
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "Role creation failed.";
+                            if (xhr.responseJSON?.message) {
+                                message = xhr.responseJSON.message;
+                                $('#team-members-spinner').hide();
+                            }
+                            showToast("Error", message, "text-danger");
+                            $('#team-members-spinner').hide();
+                        }
+                    });
+                });
+
+                $('#create-designation').on('click', function (e) {
+                    e.preventDefault();
+
+                    const name = $('#designation_name').val();
+                    const type_id = $('#staff_type').val();
+
+                    console.log({ name, type_id });
+
+
+                    if (!name || !type_id) {
+                        showToast("Validation Error", "All fields are required.", "text-warning");
+                        return;
+                    }
+
+                    const formData = {
+                        name,
+                        type_id
+                    };
+
+                    console.log('formData:', formData)
+                    console.log('reached')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/designation',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+
+                            $('#addDesignationModal').modal('hide');
+                            $('#designation_name').val();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Created!',
+                                text: 'Designation has been successfully created.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                if (requestsTable && response.data) {
+                                    console.log('requestsTable:', requestsTable);
+                                    requestsTable.row.add(response.data).draw(false);
+                                }
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            $('#designation_name').val();
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                    });
+                })
+
+                $('#create-disability').on('click', function (e) {
+                    e.preventDefault();
+
+                    const name = $('#disability_name').val();
+
+                    console.log({ name });
+
+
+                    if (!name) {
+                        showToast("Validation Error", "All fields are required.", "text-warning");
+                        return;
+                    }
+
+                    const formData = {
+                        name
+                    };
+
+                    console.log('formData:', formData)
+                    console.log('reached')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/disability',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+
+                            $('#addDisabilityModal').modal('hide');
+                            $('#disability_name').val();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Created!',
+                                text: 'Disability has been successfully created.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                if (requestsTable && response.data) {
+                                    console.log('requestsTable:', requestsTable);
+                                    requestsTable.row.add(response.data).draw(false);
+                                }
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            $('#disability_name').val();
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                    });
+                })
+
+                $('#create-type').on('click', function (e) {
+                    e.preventDefault();
+
+                    const name = $('#type_name').val();
+
+                    console.log(name);
+
+
+                    if (!name) {
+                        showToast("Validation Error", "All fields are required.", "text-warning");
+                        return;
+                    }
+
+                    const formData = {
+                        name
+                    };
+
+                    console.log('formData:', formData)
+                    console.log('reached')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/type',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function (response) {
+
+                            $('#addTypeModal').modal('hide');
+                            $('#type_name').val();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Created!',
+                                text: 'Type has been successfully created.',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+
+                                if (requestsTable && response.data) {
+                                    console.log('requestsTable:', requestsTable);
+                                    requestsTable.row.add(response.data).draw(false);
+                                }
+                            });
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            $('#type_name').val();
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                    });
+                })
+            });
+
+            $('#requestsTable').on('click', '.edit-btn', function () {
+                let entity = $(this).data('entity');
+                let id = $(this).data('id');
+                editItem(entity, id);
+            });
+
+            $('#requestsTable').on('click', '.delete-btn', function () {
+                let entity = $(this).data('entity');
+                let id = $(this).data('id');
+                deleteItem(entity, id);
+            });
+
+            async function loadEditGenders(selectedGenderId = null) {
+                $.ajax({
+                    url: '/api/gender',
+                    method: 'GET',
+                    success: function (response) {
+                        const genders = response.data;
+                        const $select = $('#edit_gender');
+                        $select.empty();
+                        $select.append('<option value="">---Select gender---</option>');
+
+                        genders.forEach(function (gen) {
+                            const isSelected = gen.id === selectedGenderId ? 'selected' : '';
+                            $select.append(`<option value="${gen.id}" ${isSelected}>${gen.name}</option>`);
+                        });
+
+                        $select.select2({
+                            placeholder: "---Select gender---",
+                            dropdownParent: $('#editStaffModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load gender:', error);
+                    }
+                });
+            };
+
+            function loadAllRolesWithAssignment(staffId) {
+                const $select = $('#edit_multiple_roles');
+                $select.empty();
+
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/role',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        const roles = response.data;
+
+
+                        roles.forEach(role => {
+                            $select.append(`<option value="${role.id}">${role.name}</option>`);
+                        });
+
+
+                        $.ajax({
+                            type: 'GET',
+                            url: `/api/staff/${staffId}/role`,
+                            contentType: 'application/json',
+                            success: function (res) {
+                                const assignedRoleIds = res.data.map(r => r.role_id);
+
+
+                                $select.val(assignedRoleIds);
+
+
+                                $select.select2({
+                                    placeholder: "---Select roles---",
+                                    dropdownParent: $('#editStaffModal'),
+                                    width: '100%',
+                                    allowClear: true
+                                });
+                            },
+                            error: function () {
+                                showToast("Error", "Failed to fetch assigned roles.", "text-danger");
+                            }
+                        });
+                    },
+                    error: function () {
+                        showToast("Error", "Failed to load roles.", "text-danger");
+                    }
+                });
+            }
+
+            async function loadEditDisabilities(selectedDisabilityId = null) {
+                $.ajax({
+                    url: '/api/disability',
+                    method: 'GET',
+                    success: function (response) {
+                        const disabilities = response.data;
+                        const $select = $('#edit_disability');
+                        $select.empty();
+                        $select.append('<option value="">---Select disability---</option>');
+
+                        disabilities.forEach(function (dis) {
+                            const isSelected = dis.id === selectedDisabilityId ? 'selected' : '';
+                            $select.append(`<option value="${dis.id}" ${isSelected}>${dis.name}</option>`);
+                        });
+
+
+                        $select.select2({
+                            placeholder: "---Select disability---",
+                            dropdownParent: $('#addStaffModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load disability:', error);
+                    }
+                });
+            };
+
+            async function loadEditStaffTypes(selectedStaffTypeId = null) {
+                $.ajax({
+                    url: '/api/type',
+                    method: 'GET',
+                    success: function (response) {
+                        const types = response.data;
+                        const $select = $('#edit_staff_type');
+                        $select.empty();
+                        $select.append('<option value="">---Select staff type---</option>');
+
+                        types.forEach(function (t) {
+                            const isSelected = t.id === selectedStaffTypeId ? 'selected' : '';
+                            $select.append(`<option value="${t.id}" ${isSelected}>${t.name}</option>`);
+                        });
+
+
+                        $select.select2({
+                            placeholder: "---Select staff type---",
+                            dropdownParent: $('#editDesignationModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load staff type:', error);
+                    }
+                });
+            };
+
+            function loadAllPermissionsWithAssignment(roleId) {
+                console.log('list of permissions for role ID:', roleId);
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/permission',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        const permissions = response.data;
+                        const container = $('#edit-permissions-container');
+                        container.empty();
+
+
+                        const grouped = permissions.reduce((acc, p) => {
+                            if (!acc[p.group]) acc[p.group] = [];
+                            acc[p.group].push(p);
+                            return acc;
+                        }, {});
+
+                        for (const group in grouped) {
+                            const html = `
+                <div class="col-md-6 mb-4">
+                    <div class="card card-bordered h-100">
+                        <div class="card-inner">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input group-checkbox" id="group-${group}" data-group="${group}">
+                                    <label class="custom-control-label fw-bold text-capitalize" for="group-${group}">${group}</label>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="row permissions-list" id="permissions-for-${group}">
+                                ${grouped[group].map(p => `
+                                <div class="col-sm-6 mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input permission-checkbox" id="perm-${p.id}" value="${p.id}" data-group="${group}">
+                                        <label class="custom-control-label" for="perm-${p.id}">${p.label}</label>
+                                    </div>
+                                </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                            container.append(html);
+                        }
+
+
+                        $('.group-checkbox').on('change', function () {
+                            const group = $(this).data('group');
+                            $(`.permission-checkbox[data-group="${group}"]`).prop('checked', $(this).prop('checked'));
+                        });
+
+
+                        $.ajax({
+                            type: 'GET',
+                            url: `/api/role/${roleId}/permission`,
+                            contentType: 'application/json',
+                            success: function (res) {
+                                const assigned = res.data.map(item => item.permission_id);
+
+                                assigned.forEach(id => {
+                                    const selector = `[id='perm-${id}']`;
+                                    const checkbox = $(selector);
+                                    if (checkbox.length) {
+                                        checkbox.prop('checked', true);
+                                    } else {
+                                        console.warn(`Checkbox not found for ID: perm-${id}`);
+                                    }
+                                });
+                            }
+                            ,
+                            error: function () {
+                                showToast("Error", "Failed to fetch assigned permissions.", "text-danger");
+                            }
+                        });
+                    },
+                    error: function () {
+                        showToast("Error", "Failed to load permissions.", "text-danger");
+                    }
+                });
+            }
+
+            function editItem(entity, id) {
+                $.ajax({
+                    url: `/api/${entity}/${id}`,
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data;
+                        console.log(data);
+
+                        if (entity === 'staff') {
+                            $('#editStaffModal [name="first_name"]').val(data.first_name);
+                            $('#editStaffModal [name="form_four_index_no"]').val(data.form_four_index_no);
+                            $('#editStaffModal [name="last_name"]').val(data.last_name);
+                            $('#editStaffModal [name="email"]').val(data.email);
+                            $('#editStaffModal [name="mobile_number"]').val(data.mobile_number);
+                            $('#editStaffModal [name="dob"]').val(data.dob);
+                            $('#editStaffModal [name="disability_id"]').val(data.disability_id);
+                            $('#editStaffModal [name="staff_ID"]').val(data.id);
+                            if (data.disability_id) {
+                                $('#editStaffModal [name="isDisabled"]').val('yes').trigger('change');
+                                $('#edit_disability_input').show();
+                                loadEditDisabilities(data.disability_id);
+                            } else {
+                                $('#editStaffModal [name="isDisabled"]').val('no').trigger('change');;
+                                $('#edit_disability_input').hide();
+                                $('#editStaffModal [name="disability_id"]').val(null);
+                            }
+                            loadEditGenders(data.gender_id);
+                            loadAllRolesWithAssignment(data.id)
+                            $('#editStaffModal').modal('show');
+                        }
+
+                        if (entity === 'disability') {
+                            $('#editDisabilityModal [name="disability"]').val(data.name);
+                            $('#editDisabilityModal [name="disability_ID"]').val(data.id);
+
+                            $('#editDisabilityModal').modal('show');
+                        }
+
+                        if (entity === 'type') {
+                            $('#editTypeModal [name="type"]').val(data.name);
+                            $('#editTypeModal [name="type_ID"]').val(data.id);
+
+                            $('#editTypeModal').modal('show');
+                        }
+
+                        if (entity === 'role') {
+                            $('#editRoleModal [name="role"]').val(data.name);
+                            $('#editRoleModal [name="role_ID"]').val(data.id);
+                            loadAllPermissionsWithAssignment(data.id)
+                            $('#editRoleModal').modal('show');
+                        }
+
+                        if (entity === 'designation') {
+                            $('#editDesignationModal [name="designation"]').val(data.name);
+                            $('#editDesignationModal [name="designation_ID"]').val(data.id);
+                            loadEditStaffTypes(data.type_id);
+
+                            $('#editDesignationModal').modal('show');
+                        }
+
+                    },
+                    error: function (xhr) {
+                        Swal.fire('Error', xhr.responseText || 'Unable to fetch details', 'error');
+                    }
+                });
+            }
+
+            function capitalize(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+
+            function deleteItem(entity, id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: `You are about to delete this ${entity}. This action cannot be undone!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/api/${entity}/${id}`,
+                            method: 'DELETE',
+                            success: function (response) {
+                                Swal.fire('Deleted!', `${entity} has been deleted.`, 'success');
+
+                                $('#requestsTable').DataTable().ajax.reload(null, false);
+                            },
+                            error: function (xhr) {
+                                Swal.fire('Error', xhr.responseText || `Failed to delete ${entity}`, 'error');
+                            }
+                        });
+                    }
+                });
+            }
+
+            $('#edit-staff').on('click', function (e) {
+                e.preventDefault();
+
+                const id = $('#editStaffModal [name="staff_ID"]').val();
+                const first_name = $('#editStaffModal [name="first_name"]').val();
+                const last_name = $('#editStaffModal [name="last_name"]').val();
+                const form_four_index_no = $('#editStaffModal [name="form_four_index_no"]').val();
+                const email = $('#editStaffModal [name="email"]').val();
+                const mobile_number = $('#editStaffModal [name="mobile_number"]').val();
+                const dob = $('#editStaffModal [name="dob"]').val();
+                const disability_id = $('#editStaffModal [name="disability_id"]').val() || null;
+                const gender_id = $('#editStaffModal [name="gender_id"]').val();
+                const password = $('#editStaffModal [name="password"]').val();
+
+                const formData = {
+                    first_name,
+                    last_name,
+                    form_four_index_no,
+                    email,
+                    mobile_number,
+                    dob,
+                    disability_id,
+                    gender_id,
+                    password
+                };
+
+                if (!first_name || !last_name || !form_four_index_no || !email || !mobile_number || !dob || !gender_id) {
+                    Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                    return;
+                }
+
+                $.ajax({
+                    url: `/api/staff/${id}`,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+
+                        if (requestsTable && response.data) {
+                            const rowIndex = requestsTable.rows().eq(0).filter(function (rowIdx) {
+                                return requestsTable.row(rowIdx).data().id === id;
+                            });
+                            if (rowIndex.length) {
+                                requestsTable.row(rowIndex[0]).data(response.data).draw(false);
+                            } else {
+                                requestsTable.ajax.reload();
+                            }
+                        }
+
+                        const selectedRoles = $('#edit_multiple_roles').val() || [];
+
+                        $.ajax({
+                            type: 'POST',
+                            url: `/api/staff/${id}/role`,
+                            contentType: 'application/json',
+                            data: JSON.stringify({ RoleIds: selectedRoles }),
+                            success: function () {
+                                $('#editStaffModal').modal('hide');
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: 'Staff and roles updated successfully!',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                })
+                            },
+                            error: function () {
+                                Swal.fire('Error', 'Failed to update staff roles.', 'error');
+                            }
+                        });
+                    },
+                    error: function (xhr) {
+                        let message = 'Failed to update staff';
+                        if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+                        Swal.fire('Error', message, 'error');
+                    }
+                });
+            });
+
+            $('#edit-role').on('click', function (e) {
+                e.preventDefault();
+
+                const id = $('#editRoleModal [name="role_ID"]').val();
+                const name = $('#editRoleModal [name="role"]').val();
+                const selectedPermissions = $('.permission-checkbox:checked').map(function () {
+                    return $(this).val();
+                }).get();
+
+                console.log('selected:', selectedPermissions);
+
+                if (!name) {
+                    Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                    return;
+                }
+                if (selectedPermissions.length === 0) {
+                    Swal.fire('Validation Error', 'Please select at least one permission', 'warning');
+                    return;
+                }
+
+                const formData = { name };
+
+                $.ajax({
+                    url: `/api/role/${id}`,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: `/api/role/${id}/permission`,
+                            contentType: 'application/json',
+                            data: JSON.stringify({ permissionIds: selectedPermissions }),
+                            success: function () {
+                                $('#editRoleModal').modal('hide');
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: 'Role and permissions updated successfully!',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                if (requestsTable) {
+                                    const rowIndex = requestsTable.rows().eq(0).filter(function (rowIdx) {
+                                        return requestsTable.row(rowIdx).data().id === id;
+                                    });
+                                    if (rowIndex.length) {
+                                        requestsTable.row(rowIndex[0]).data(response.data).draw(false);
+                                    } else {
+                                        requestsTable.ajax.reload();
+                                    }
+                                }
+                            },
+                            error: function (xhr) {
+                                let message = 'Failed to update permissions';
+                                if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
+                                Swal.fire('Error', message, 'error');
+                            }
+                        });
+
+                    },
+                    error: function (xhr) {
+                        let message = 'Failed to update role';
+                        if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
+                        Swal.fire('Error', message, 'error');
+                    }
+                });
+            });
+
+            $('#edit-disability').on('click', function (e) {
+                e.preventDefault();
+
+                const id = $('#editDisabilityModal [name="disability_ID"]').val();
+                const name = $('#editDisabilityModal [name="disability"]').val();
+                const formData = {
+                    name
+                };
+                console.log('role:', formData)
+
+                if (!name) {
+                    Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                    return;
+                }
+
+                $.ajax({
+                    url: `/api/disability/${id}`,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        $('#editStaffModal').modal('hide');
+                        Swal.fire('Success', 'Disability updated successfully', 'success', 2000);
+
+                        if (requestsTable) {
+
+                            const rowIndex = requestsTable.rows().eq(0).filter(function (rowIdx) {
+                                return requestsTable.row(rowIdx).data().id === id;
+                            });
+                            if (rowIndex.length) {
+                                requestsTable.row(rowIndex[0]).data(response.data).draw(false);
+                            } else {
+
+                                requestsTable.ajax.reload();
+                            }
+                        }
+                    },
+                    error: function (xhr) {
+                        let message = 'Failed to update Disability';
+                        if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+                        Swal.fire('Error', message, 'error');
+                    }
+                });
+            });
+
+            $('#edit-type').on('click', function (e) {
+                e.preventDefault();
+
+                const id = $('#editTypeModal [name="type_ID"]').val();
+                const name = $('#editTypeModal [name="type"]').val();
+                const formData = {
+                    name
+                };
+                console.log('type:', formData)
+
+                if (!name) {
+                    Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                    return;
+                }
+
+                $.ajax({
+                    url: `/api/type/${id}`,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        $('#editStaffModal').modal('hide');
+                        Swal.fire('Success', 'Type updated successfully', 'success', 2000);
+
+                        if (requestsTable) {
+
+                            const rowIndex = requestsTable.rows().eq(0).filter(function (rowIdx) {
+                                return requestsTable.row(rowIdx).data().id === id;
+                            });
+                            if (rowIndex.length) {
+                                requestsTable.row(rowIndex[0]).data(response.data).draw(false);
+                            } else {
+
+                                requestsTable.ajax.reload();
+                            }
+                        }
+                    },
+                    error: function (xhr) {
+                        let message = 'Failed to update Type';
+                        if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+                        Swal.fire('Error', message, 'error');
+                    }
+                });
+            });
+
+            $('#edit-designation').on('click', function (e) {
+                e.preventDefault();
+
+                const id = $('#editDesignationModal [name="designation_ID"]').val();
+                const name = $('#editDesignationModal [name="designation"]').val();
+                const type_id = $('#editDesignationModal [name="staff_type"]').val();
+                const formData = {
+                    name, type_id
+                };
+                console.log('type:', formData)
+
+                if (!name) {
+                    Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                    return;
+                }
+
+                $.ajax({
+                    url: `/api/designation/${id}`,
+                    method: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        $('#editStaffModal').modal('hide');
+                        Swal.fire('Success', 'Designation updated successfully', 'success', 2000);
+
+                        if (requestsTable) {
+
+                            const rowIndex = requestsTable.rows().eq(0).filter(function (rowIdx) {
+                                return requestsTable.row(rowIdx).data().id === id;
+                            });
+                            if (rowIndex.length) {
+                                requestsTable.row(rowIndex[0]).data(response.data).draw(false);
+                            } else {
+
+                                requestsTable.ajax.reload();
+                            }
+                        }
+                    },
+                    error: function (xhr) {
+                        let message = 'Failed to update Designation';
+                        if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+                        Swal.fire('Error', message, 'error');
+                    }
+                });
+            });
+
+            function showAddRoleModel() {
+                console.log('reached');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/permission',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log('response:', response.data);
+                        const permissions = response.data;
+                        const permissionsContainer = $('#permissions-container');
+                        permissionsContainer.empty();
+
+                        const groupedPermissions = permissions.reduce((acc, permission) => {
+                            const groupName = permission.group;
+                            if (!acc[groupName]) {
+                                acc[groupName] = [];
+                            }
+                            acc[groupName].push(permission);
+                            return acc;
+                        }, {});
+
+                        for (const group in groupedPermissions) {
+                            const groupPermissions = groupedPermissions[group];
+                            const cardHtml = `
+                    <div class="col-md-6 mb-4">
+                        <div class="card card-bordered h-100">
+                            <div class="card-inner">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input group-checkbox" id="group-${group}" data-group="${group}">
+                                        <label class="custom-control-label text-capitalize fw-bold" for="group-${group}">
+                                            ${group}
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr class="my-2">
+                                <div class="row permissions-list" id="permissions-for-${group}">
+                                    ${groupPermissions.map(p => `
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input permission-checkbox" id="permission-${p.id}" value="${p.id}" data-group="${group}">
+                                                <label class="custom-control-label" for="permission-${p.id}">${p.label}</label>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                            permissionsContainer.append(cardHtml);
+                        }
+
+                        $('.group-checkbox').on('change', function () {
+                            const group = $(this).data('group');
+                            $(`.permission-checkbox[data-group="${group}"]`).prop('checked', $(this).prop('checked'));
+                        });
+                    },
+                    error: function (xhr) {
+                        console.error('Error loading permissions:', xhr.responseText);
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: '/api/entity',
+                    method: 'GET',
+                    success: function (response) {
+                        const data = response.data
+                        const $select = $('#EntityId');
+                        $select.empty();
+                        $select.append('<option value="">---Select Academic Entity---</option>');
+
+                        data.forEach(function (entity) {
+                            $select.append(`<option value="${entity.name.toLowerCase()}" >${entity.name}</option>`);
+                        });
+
+                        const entityToLoad = localStorage.getItem('entityToLoad');
+                        if (entityToLoad) {
+                            $select.val(entityToLoad).trigger('change');
+                            localStorage.removeItem('entityToLoad');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load departments:', error);
+                    }
+                });
+
+                const entityConfigs = {
+                    class: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Class Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/class"
+                    },
+                    term: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Term Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/term"
+                    },
+                    year: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "year", title: "year Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/year"
+                    },
+                    subject: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Subject Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/subject"
+                    },
+                    gender: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Gender Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/gender"
+                    },
+                    stream: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Stream Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/stream"
+                    },
+                    type: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Staff Type Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/type"
+                    },
+                    designation: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Designation Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/designation"
+                    },
+                    staff: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "form_four_index_no", title: "index Number" },
+                            { key: "first_name", title: "first name" },
+                            { key: "last_name", title: "last name" },
+                            { key: "email", title: "Email" },
+                            { key: "dob", title: "Date of Birth" },
+                            { key: "mobile_number", title: "mobile number" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/staff"
+                    },
+                    disability: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Disability Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/disability"
+                    },
+                    role: {
+                        columns: [
+                            { key: "sn", title: "S/N" },
+                            { key: "name", title: "Role Name" },
+                            { key: "actions", title: "Actions" }
+                        ],
+                        ajaxUrl: "/api/role"
+                    },
+                };
+
+
+
+                $('#EntityId').on('change', function () {
+                    const selectedEntity = $(this).val();
+                    console.log('changed to:', selectedEntity);
+                    const config = entityConfigs[selectedEntity];
+
+                    if (!config) {
+                        $('#addEntityBtn').hide();
+                        if (requestsTable) requestsTable.clear().destroy();
+                        $('#requestsTable thead, #requestsTable tbody').empty();
+                        return;
+                    }
+
+                    $('#addEntityBtn')
+                        .html(`<em class="icon ni ni-plus-circle"></em> Add ${selectedEntity.charAt(0).toUpperCase() + selectedEntity.slice(1)}`)
+                        .data('entity', selectedEntity)
+                        .show();
+
+                    $('#addEntityBtn').on('click', function () {
+                        const entity = $(this).data('entity');
+
+                        const modalId = `#add${entity.charAt(0).toUpperCase() + entity.slice(1)}Modal`;
+
+                        if (entity === 'role') {
+                            showAddRoleModel();
+                        }
+                        $(modalId).modal('show');
+                    });
+
+                    let theadHtml = '<tr class="nk-tb-item nk-tb-head">';
+                    config.columns.forEach(col => {
+                        theadHtml += `<th class="nk-tb-col"><span class="sub-text">${col.title}</span></th>`;
+                    });
+                    theadHtml += '</tr>';
+                    $('#requestsTable thead').html(theadHtml);
+
+                    if ($.fn.DataTable.isDataTable('#requestsTable')) {
+                        $('#requestsTable').DataTable().clear().destroy();
+                        $('#requestsTable tbody').empty();
+                    }
+
+                    $('#team-members-spinner').show();
+                    requestsTable = $('#requestsTable').DataTable({
+                        ajax: {
+                            url: config.ajaxUrl,
+                            dataSrc: "data",
+                            complete: function () {
+                                $('#team-members-spinner').hide();
+                            }
+                        },
+                        columns: config.columns.map(col => {
+                            if (col.key === "sn") {
+                                return {
+                                    data: null,
+                                    render: (data, type, row, meta) => meta.row + 1
+                                };
+                            }
+                            if (col.key === "actions") {
+                                return {
+                                    data: null,
+                                    orderable: false,
+                                    searchable: false,
+                                    render: (data, type, row) => `
+                    <ul class="nk-tb-actions gx-1">
+                        <li>
+                            <div class="drodown dropstart">
+                                <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown">
+                                    <em class="icon ni ni-more-h"></em>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <ul class="link-list-opt no-bdr">
+                                        <li>
+            <a href="#" class="edit-btn" data-entity="${selectedEntity}" data-id="${row.id}">
+                <em class="icon ni ni-eye"></em><span>Edit Details</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="delete-btn" data-entity="${selectedEntity}" data-id="${row.id}">
+                <em class="icon ni ni-na"></em><span>Delete</span>
+            </a>
+        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>`
+                                };
+                            }
+                            return { data: col.key };
+                        }),
+                        paging: true,
+                        ordering: true,
+                        info: true,
+                        searching: true,
+                        responsive: true,
+                        dom:
+                            '<"row align-items-center justify-content-between g-2"' +
+                            '<"col-md-4 col-sm-12"f>' +
+                            '<"col-md-4 col-sm-12"B>' +
+                            '<"col-md-4 col-sm-12"l>' +
+                            '>rt<"row align-items-center justify-content-between g-2"' +
+                            '<"col-md-6"i>' +
+                            '<"col-md-6"p>' +
+                            '>',
+                        buttons: [
+                            { extend: 'copy', className: 'btn btn-sm btn-primary' },
+                            { extend: 'csv', className: 'btn btn-sm btn-success' },
+                            { extend: 'excel', className: 'btn btn-sm btn-warning' },
+                            { extend: 'pdf', className: 'btn btn-sm btn-danger' },
+                            { extend: 'print', className: 'btn btn-sm btn-info' }
+                        ],
+                        createdRow: function (row, data, dataIndex) {
+                            $(row).addClass('nk-tb-item');
+                            $(row).find('td').each(function () {
+                                $(this).addClass('nk-tb-col');
+                            });
+                        }
+                    });
+                });
+
+            });
+        </script>
+</body>
+
+</html>
