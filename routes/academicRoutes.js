@@ -87,7 +87,7 @@ router.delete('/attendance/:AttendanceId', StaffController.deleteAttendance.bind
 router.get('/view/:date', StaffController.getAttendanceByDate.bind(StaffController));
 router.get('/hello', StaffController.getAttendanceSummary.bind(StaffController));
 
-router.get('/Home', authMiddleware.verifyToken, rbac("view_assesment"),(req, res) => {
+router.get('/Home', authMiddleware.verifyToken, (req, res) => {
 
     const email = req.session.staffEmail || '';
     const lastname = req.session.lastname || '';
