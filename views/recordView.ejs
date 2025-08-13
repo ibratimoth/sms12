@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>SchoolMS</title>
+    <link rel="stylesheet" href="/assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="/assets/css/themee1e3.css?ver=3.2.4">
+    <link rel="stylesheet" href="/assets/css/style1.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* Simple styling for modal form inputs inside SweetAlert */
+        .swal2-html-container form label {
+            display: block;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .swal2-html-container form input,
+        .swal2-html-container form select {
+            width: 100%;
+            padding: 6px 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+
+        #dataTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #dataTable th,
+        #dataTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            vertical-align: middle;
+        }
+
+        #dataTable th {
+            background-color: #f2f2f2;
+            font-weight: 700;
+        }
+
+        .action-btn {
+            margin-right: 6px;
+            padding: 4px 8px;
+            cursor: pointer;
+            border: none;
+            border-radius: 3px;
+            color: white;
+        }
+
+        .edit-btn {
+            background-color: #0d6efd;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        #addBtn {
+            margin: 12px 0;
+        }
+
+        .no-data-row td {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="nk-block-head nk-block-head-sm">
+                                            <div class="nk-block-between">
+                                                <div class="nk-block-head-content">
+                                                    <h3 class="nk-block-title page-title">Manage Records</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="entitySelect" class="form-label">Select Entity</label>
+                                            <select id="entitySelect" class="form-select" style="max-width: 300px;">
+                                                <option value="" selected disabled>-- Select Table --</option>
+                                                <option value="year">Year</option>
+                                                <option value="class">Class</option>
+                                                <option value="stream">Stream</option>
+                                                <option value="student">Student</option>
+                                                <option value="subject">Subject</option>
+                                                <option value="term">Term</option>
+                                                <option value="assessment">Assessment</option>
+                                                <option value="examination">Examination</option>
+                                            </select>
+                                        </div>
+
+                                        <button id="addBtn" class="btn btn-primary" style="display:none;">Add New
+                                            Record</button>
+
+                                        <!-- Data Table -->
+                                        <div class="card card-bordered card-preview mt-3">
+                                            <div class="card-inner p-3" style="overflow-x:auto;">
+                                                <div class="row mb-2">
+                                                    <div class="col-4 ms-auto">
+                                                        <input type="text" id="tableSearch"
+                                                            class="form-control form-control-sm"
+                                                            placeholder="Search...">
+                                                    </div>
+                                                </div>
+                                                <table id="dataTable" class="datatable-init-export nowrap table"
+                                                    data-export-title="Export">
+                                                    <thead></thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                                <div id="pagination" class="mt-3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <%-include('footer.ejs')%>
+                </div>
+        </div>
+    </div>
+
+    <%-include('right-side.ejs')%>
+
+        <script src="/assets/js/bundlee1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/scriptse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+        <script src="/assets/js/charts/gd-defaulte1e3.js?ver=3.2.4"></script>
+        <!-- DataTables core -->
+        <link rel="stylesheet" href="assets/css/libs/datatable.css">
+        <script src="assets/js/libs/datatable.js"></script>
+
+        <!-- DataTables Buttons extension -->
+        <link rel="stylesheet" href="assets/css/libs/datatable-btns.css">
+        <script src="assets/js/libs/datatable-btnse1e3.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+                const currentPath = window.location.pathname;
+                console.log("Current Path:", currentPath);
+
+                $(".nk-menu-link").each(function () {
+                    const linkPath = new URL(this.href).pathname;
+                    console.log("Link Path:", linkPath);
+                    if (linkPath === currentPath) {
+                        $(this).addClass("active");
+                    } else {
+                        $(this).removeClass("active");
+                    }
+                });
+            });
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+
+                    window.location.reload();
+                }
+            });
+
+            $(document).ready(function () {
+                $('#logout-link').on('click', function (e) {
+                    e.preventDefault();
+
+                    console.log('reached')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/logout',
+                        contentType: 'application/json',
+                        success: function (response) {
+                            showToast("Success", "Logged out in successfully", "text-success");
+                            window.location.href = '/'
+                        },
+                        error: function (xhr) {
+                            let message = "Request failed. Please try again.";
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                message = xhr.responseJSON.message;
+                            }
+                            showToast("Error", message, "text-danger");
+                            return;
+                        },
+                    });
+                })
+
+                function showToast(title, body, titleClass) {
+                    const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                    const $toast = $(toastHtml);
+                    $('.toast-container').append($toast);
+                    const toast = new bootstrap.Toast($toast[0]);
+                    toast.show();
+                }
+            })
+            $(function () {
+                let currentEntity = '';
+                let currentColumns = [];
+                let parentDataCache = {};
+
+                // Pagination variables
+                let currentPage = 1;
+                const rowsPerPage = 3;
+                let loadedData = [];
+
+                const entityConfig = {
+                    year: { parentField: null, api: '/year', fields: ['name', 'start_date', 'end_date', 'is_active'] },
+                    class: { parentField: 'year_id', api: '/class', parentEntity: 'year', fields: ['name', 'capacity', 'year_id'] },
+                    stream: { parentField: 'class_id', api: '/stream', parentEntity: 'class', fields: ['name', 'capacity', 'class_id'] },
+                    student: { parentField: 'stream_id', api: '/student', parentEntity: 'stream', fields: ['first_name', 'middle_name', 'last_name', 'birth_date', 'gender', 'stream_id'], enums: { gender: ['Male', 'Female'] } },
+                    subject: { parentField: 'class_id', api: '/subject', parentEntity: 'class', fields: ['name', 'code', 'is_optional', 'class_id'] },
+                    term: { parentField: 'year_id', api: '/term', parentEntity: 'year', fields: ['name', 'start_date', 'end_date', 'year_id'] },
+                    assessment: { parentField: 'term_id', api: '/assessment', parentEntity: 'term', fields: ['name', 'term_id'] },
+                    examination: { parentField: 'assessment_id', api: '/examination', parentEntity: 'assessment', fields: ['name', 'start_date', 'end_date', 'assessment_id'] }
+                };
+
+                function escapeHtml(text) {
+                    if (typeof text !== 'string') return text;
+                    return text.replace(/[&<>"'`=\/]/g, function (s) {
+                        return ({
+                            '&': '&amp;',
+                            '<': '&lt;',
+                            '>': '&gt;',
+                            '"': '&quot;',
+                            "'": '&#39;',
+                            '`': '&#96;',
+                            '=': '&#61;',
+                            '/': '&#47;'
+                        })[s];
+                    });
+                }
+
+                function detectInputType(fieldName, value) {
+                    const lowerName = fieldName.toLowerCase();
+                    if (lowerName.includes('date')) return 'date';
+                    if (lowerName.includes('id') && lowerName !== 'id') return 'number';
+                    if (lowerName.includes('number')) return 'number';
+                    return 'text';
+                }
+
+                function prettifyColumnName(colName) {
+                    return colName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                }
+
+                function fetchParentData(parentEntity) {
+                    if (!parentEntity) return $.Deferred().resolve();
+                    if (parentDataCache[parentEntity]) return $.Deferred().resolve();
+
+                    const api = entityConfig[parentEntity]?.api;
+                    if (!api) return $.Deferred().resolve();
+
+                    return $.ajax({
+                        url: api,
+                        method: 'GET',
+                        success: function (res) {
+                            let data = res.data ? res.data : res;
+                            parentDataCache[parentEntity] = data;
+                        }
+                    });
+                }
+
+                function buildParentSelect(parentEntity, selectedValue) {
+                    const parentList = parentDataCache[parentEntity] || [];
+                    const parentField = entityConfig[currentEntity].parentField;
+
+                    let optionsHtml = `<option value="">-- Select ${parentEntity} --</option>`;
+
+                    parentList.forEach(item => {
+                        let id = item.id || item.ID || item[`${parentEntity}_id`] || item.id;
+                        let name = item.name || item[`${parentEntity}_name`] || `ID:${id}`;
+                        let selected = selectedValue == id ? 'selected' : '';
+                        optionsHtml += `<option value="${id}" ${selected}>${escapeHtml(name)}</option>`;
+                    });
+
+                    return `
+            <label for="field_${parentField}">${prettifyColumnName(parentField)}</label>
+            <select id="field_${parentField}" name="${parentField}" class="form-control" required>
+                ${optionsHtml}
+            </select>
+        `;
+                }
+
+                function buildFormFields(data = {}) {
+                    let formHtml = '';
+                    const config = entityConfig[currentEntity];
+                    const parentField = config?.parentField;
+                    const parentEntity = config?.parentEntity;
+
+                    currentColumns.forEach(col => {
+                        if (col.toLowerCase() === 'id') return;
+                        if (col === parentField) {
+                            formHtml += buildParentSelect(parentEntity, data[col]);
+                            return;
+                        }
+
+                        const val = data[col] !== undefined && data[col] !== null ? data[col] : '';
+
+                        if (config.enums && config.enums[col]) {
+                            let optionsHtml = `<option value="">-- Select ${prettifyColumnName(col)} --</option>`;
+                            config.enums[col].forEach(option => {
+                                let selected = val === option ? 'selected' : '';
+                                optionsHtml += `<option value="${option}" ${selected}>${escapeHtml(option)}</option>`;
+                            });
+
+                            formHtml += `
+                                <label for="field_${col}">${prettifyColumnName(col)}</label>
+                                <select id="field_${col}" name="${col}" class="form-control" required>
+                                    ${optionsHtml}
+                                </select>
+                            `;
+                            return; // skip normal input
+                        }
+
+                        const inputType = detectInputType(col, val);
+                        const escapedVal = escapeHtml(val);
+
+                        if (inputType === 'date' && val) {
+                            let d = new Date(val);
+                            if (!isNaN(d)) {
+                                let yyyy = d.getFullYear();
+                                let mm = String(d.getMonth() + 1).padStart(2, '0');
+                                let dd = String(d.getDate()).padStart(2, '0');
+                                formHtml += `
+                        <label for="field_${col}">${prettifyColumnName(col)}</label>
+                        <input type="date" id="field_${col}" name="${col}" value="${yyyy}-${mm}-${dd}" class="form-control" />
+                    `;
+                                return;
+                            }
+                        }
+
+                        formHtml += `
+                <label for="field_${col}">${prettifyColumnName(col)}</label>
+                <input type="${inputType}" id="field_${col}" name="${col}" value="${escapedVal}" class="form-control" />
+            `;
+                    });
+
+                    return formHtml;
+                }
+
+                function renderTable(data) {
+                    const totalPages = Math.ceil(data.length / rowsPerPage);
+                    if (currentPage > totalPages) currentPage = totalPages;
+                    if (currentPage < 1) currentPage = 1;
+
+                    const startIndex = (currentPage - 1) * rowsPerPage;
+                    const endIndex = startIndex + rowsPerPage;
+                    const paginatedData = data.slice(startIndex, endIndex);
+
+                    // Destroy DataTable BEFORE changing table HTML
+                    if ($.fn.DataTable.isDataTable('#dataTable')) {
+                        $('#dataTable').DataTable().clear().destroy();
+                    }
+
+                    let headerHtml = '<tr>';
+                    headerHtml += `<th>S/N</th>`;
+                    currentColumns.forEach(col => {
+                        if (col.toLowerCase().includes('id')) return;
+                        headerHtml += `<th>${prettifyColumnName(col)}</th>`;
+                    });
+                    headerHtml += '<th>Actions</th></tr>';
+                    $('#dataTable thead').html(headerHtml);
+
+                    let rowsHtml = '';
+                    paginatedData.forEach((row, index) => {
+                        rowsHtml += '<tr>';
+                        rowsHtml += `<td>${startIndex + index + 1}</td>`;
+                        currentColumns.forEach(col => {
+                            if (col.toLowerCase().includes('id')) return;
+                            let val = row[col];
+                            if (val === null || val === undefined) val = '';
+                            rowsHtml += `<td>${escapeHtml(val)}</td>`;
+                        });
+                        let idVal = row.id ?? row[currentColumns[0]];
+                        rowsHtml += `
+                            <td>
+                                <button class="btn btn-sm edit-btn action-btn" data-id="${idVal}" data-row='${JSON.stringify(row)}'>Edit</button>
+                                <button class="btn btn-sm delete-btn action-btn" data-id="${idVal}">Delete</button>
+                            </td>
+                        </tr>`;
+                    });
+                    $('#dataTable tbody').html(rowsHtml);
+
+                    let paginationHtml = `<nav aria-label="Page navigation"><ul class="pagination justify-content-end">`;
+                    paginationHtml += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                        <button class="page-link page-btn" data-page="${currentPage - 1}">Prev</button>
+                    </li>`;
+                    for (let i = 1; i <= totalPages; i++) {
+                        paginationHtml += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <button class="page-link page-btn" data-page="${i}">${i}</button>
+                        </li>`;
+                    }
+                    paginationHtml += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                        <button class="page-link page-btn" data-page="${currentPage + 1}">Next</button>
+                    </li>`;
+                    paginationHtml += `</ul></nav>`;
+                    $('#pagination').html(paginationHtml);
+
+                    //  Initialize DataTable AFTER HTML is ready
+                    $('#dataTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                        ordering: false,
+                        paging: false,
+                        searching: false
+                    });
+                }
+
+                function loadData(entity) {
+                    if (!entity) return;
+
+                    currentEntity = entity;
+                    Swal.fire({
+                        title: `Loading ${entity} data...`,
+                        allowOutsideClick: false,
+                        didOpen: () => Swal.showLoading()
+                    });
+
+                    const config = entityConfig[entity];
+                    if (!config) {
+                        Swal.close();
+                        Swal.fire('Error', 'Unknown entity selected', 'error');
+                        return;
+                    }
+
+                    fetchParentData(config.parentEntity).done(() => {
+                        $.ajax({
+                            url: config.api,
+                            method: 'GET',
+                            success: function (response) {
+                                Swal.close();
+
+                                let data = response.data ? response.data : response;
+
+                                if (!data || data.length === 0) {
+                                    currentColumns = entityConfig[entity].fields || [];
+                                    $('#dataTable thead').html('');
+                                    $('#dataTable tbody').html('<tr class="no-data-row"><td colspan="99">No data available</td></tr>');
+                                    $('#pagination').html('');
+                                    $('#addBtn').show();
+                                    return;
+                                }
+
+                                currentColumns = Object.keys(data[0]);
+                                loadedData = data;
+                                const totalPages = Math.ceil(loadedData.length / rowsPerPage);
+                                if (currentPage > totalPages) currentPage = totalPages;
+                                if (currentPage < 1) currentPage = 1;
+                                renderTable(loadedData);
+                                $('#addBtn').show();
+                            },
+                            error: function () {
+                                Swal.close();
+                                Swal.fire('Error', 'Failed to load data. Please try again.', 'error');
+                            }
+                        });
+                    });
+                }
+
+                $(document).on('input', '#tableSearch', function () {
+                    const query = $(this).val().toLowerCase();
+
+                    filteredData = loadedData.filter(row => {
+                        return currentColumns.some(col => {
+                            if (col.toLowerCase().includes('id')) return false; // skip IDs
+                            const val = row[col];
+                            return val !== null && val !== undefined && val.toString().toLowerCase().includes(query);
+                        });
+                    });
+
+                    currentPage = 1; // reset to first page on search
+                    renderTable(filteredData);
+                });
+
+
+                $(document).on('click', '.page-btn', function () {
+                    const page = parseInt($(this).data('page'));
+                    if (!isNaN(page)) {
+                        currentPage = page;
+                        renderTable(loadedData);
+                    }
+                });
+
+                function openModal(title, rowData = {}) {
+                    const isEdit = !!rowData.id || Object.keys(rowData).length > 0;
+                    Swal.fire({
+                        title,
+                        html: `<form id="crudForm">${buildFormFields(rowData)}</form>`,
+                        focusConfirm: false,
+                        showCancelButton: true,
+                        confirmButtonText: isEdit ? 'Update' : 'Create',
+                        preConfirm: () => {
+                            const formData = {};
+                            $('#crudForm').serializeArray().forEach(({ name, value }) => {
+                                formData[name] = value;
+                            });
+                            if (isEdit && rowData.id) {
+                                formData.id = rowData.id;
+                            }
+                            return formData;
+                        }
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: isEdit ? 'Updating...' : 'Creating...',
+                                allowOutsideClick: false,
+                                didOpen: () => Swal.showLoading()
+                            });
+
+                            const method = isEdit ? 'PUT' : 'POST';
+                            const url = isEdit ? `${entityConfig[currentEntity].api}/${result.value.id}` : entityConfig[currentEntity].api;
+
+                            $.ajax({
+                                url,
+                                method,
+                                data: result.value,
+                                success: () => {
+                                    Swal.close();
+                                    Swal.fire('Success', `${title} successful!`, 'success');
+                                    loadData(currentEntity);
+                                },
+                                error: (xhr) => {
+                                    Swal.close();
+                                    let errMsg = xhr.responseJSON?.error || 'Operation failed';
+                                    Swal.fire('Error', errMsg, 'error');
+                                }
+                            });
+                        }
+                    });
+                }
+
+                $('#entitySelect').on('change', function () {
+                    const selected = $(this).val();
+                    loadData(selected);
+                });
+
+                $('#addBtn').on('click', function () {
+                    openModal(`Add New ${currentEntity.charAt(0).toUpperCase() + currentEntity.slice(1)}`);
+                });
+
+                $(document).on('click', '.edit-btn', function () {
+                    const rowData = $(this).data('row');
+                    openModal(`Edit ${currentEntity.charAt(0).toUpperCase() + currentEntity.slice(1)}`, rowData);
+                });
+
+                $(document).on('click', '.delete-btn', function () {
+                    const id = $(this).data('id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "This action cannot be undone.",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'Cancel'
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: 'Deleting...',
+                                allowOutsideClick: false,
+                                didOpen: () => Swal.showLoading()
+                            });
+
+                            $.ajax({
+                                url: `${entityConfig[currentEntity].api}/${id}`,
+                                method: 'DELETE',
+                                success: () => {
+                                    Swal.close();
+                                    Swal.fire('Deleted!', 'Record has been deleted.', 'success');
+                                    loadData(currentEntity);
+                                },
+                                error: () => {
+                                    Swal.close();
+                                    Swal.fire('Error', 'Failed to delete record.', 'error');
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+</body>
+
+</html>

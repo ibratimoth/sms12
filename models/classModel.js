@@ -1,21 +1,34 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 
-const Class = sequelize.define('classes', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-}, { 
+module.exports = () => {
+  const Class = sequelize.define('Class', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+     capacity: { 
+      type: DataTypes.INTEGER, 
+      allowNull: true 
+    },
+    year_id: {
+      type: DataTypes.UUID,
+      allowNull: false
+    }
+  },{
     tableName: 'classes',
-    timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
- });
-
-module.exports = Class;
+    underscored: true,
+    timestamps: false
+  })
+  Class.associate = models => {
+    Class.belongsTo(models.Year, {foreignKey: 'year_id'})
+    Class.hasMany(models.Stream, {foreignKey: 'class_id'})
+    Class.hasMany(models.Subject, {foreignKey: 'class_id'})
+  }
+  return Class
+}

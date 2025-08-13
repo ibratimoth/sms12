@@ -1082,7 +1082,7 @@
                         name,
                         type_id
                     };
-
+                    $('#team-members-spinner').show();
                     console.log('formData:', formData)
                     console.log('reached')
                     $.ajax({
@@ -1094,6 +1094,7 @@
 
                             $('#addDesignationModal').modal('hide');
                             $('#designation_name').val();
+                            $('#team-members-spinner').hide();
 
                             Swal.fire({
                                 icon: 'success',
@@ -1112,9 +1113,11 @@
                             let message = "Request failed. Please try again.";
                             if (xhr.responseJSON && xhr.responseJSON.message) {
                                 message = xhr.responseJSON.message;
+                                $('#team-members-spinner').hide();
                             }
                             $('#designation_name').val();
                             showToast("Error", message, "text-danger");
+                            $('#team-members-spinner').hide();
                             return;
                         },
                     });
@@ -1136,7 +1139,7 @@
                     const formData = {
                         name
                     };
-
+                    $('#team-members-spinner').show();
                     console.log('formData:', formData)
                     console.log('reached')
                     $.ajax({
@@ -1148,6 +1151,7 @@
 
                             $('#addDisabilityModal').modal('hide');
                             $('#disability_name').val();
+                            $('#team-members-spinner').hide();
 
                             Swal.fire({
                                 icon: 'success',
@@ -1166,9 +1170,11 @@
                             let message = "Request failed. Please try again.";
                             if (xhr.responseJSON && xhr.responseJSON.message) {
                                 message = xhr.responseJSON.message;
+                                $('#team-members-spinner').hide();
                             }
                             $('#disability_name').val();
                             showToast("Error", message, "text-danger");
+                            $('#team-members-spinner').hide();
                             return;
                         },
                     });
@@ -1190,7 +1196,7 @@
                     const formData = {
                         name
                     };
-
+                    $('#team-members-spinner').show();
                     console.log('formData:', formData)
                     console.log('reached')
                     $.ajax({
@@ -1202,7 +1208,7 @@
 
                             $('#addTypeModal').modal('hide');
                             $('#type_name').val();
-
+                            $('#team-members-spinner').hide();
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Created!',
@@ -1221,9 +1227,11 @@
                             let message = "Request failed. Please try again.";
                             if (xhr.responseJSON && xhr.responseJSON.message) {
                                 message = xhr.responseJSON.message;
+                                $('#team-members-spinner').hide();
                             }
                             $('#type_name').val();
                             showToast("Error", message, "text-danger");
+                            $('#team-members-spinner').hide();
                             return;
                         },
                     });
@@ -1243,10 +1251,12 @@
             });
 
             async function loadEditGenders(selectedGenderId = null) {
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: '/api/gender',
                     method: 'GET',
                     success: function (response) {
+                        $('#team-members-spinner').hide();
                         const genders = response.data;
                         const $select = $('#edit_gender');
                         $select.empty();
@@ -1264,6 +1274,7 @@
                     },
                     error: function (xhr, status, error) {
                         console.error('Failed to load gender:', error);
+                        $('#team-members-spinner').hide();
                     }
                 });
             };
@@ -1272,7 +1283,7 @@
                 const $select = $('#edit_multiple_roles');
                 $select.empty();
 
-
+                $('#team-members-spinner').show();
                 $.ajax({
                     type: 'GET',
                     url: '/api/role',
@@ -1291,6 +1302,7 @@
                             url: `/api/staff/${staffId}/role`,
                             contentType: 'application/json',
                             success: function (res) {
+                                $('#team-members-spinner').hide();
                                 const assignedRoleIds = res.data.map(r => r.role_id);
 
 
@@ -1306,11 +1318,13 @@
                             },
                             error: function () {
                                 showToast("Error", "Failed to fetch assigned roles.", "text-danger");
+                                $('#team-members-spinner').hide();
                             }
                         });
                     },
                     error: function () {
                         showToast("Error", "Failed to load roles.", "text-danger");
+                        $('#team-members-spinner').hide();
                     }
                 });
             }
@@ -1371,11 +1385,13 @@
 
             function loadAllPermissionsWithAssignment(roleId) {
                 console.log('list of permissions for role ID:', roleId);
+                $('#team-members-spinner').show();
                 $.ajax({
                     type: 'GET',
                     url: '/api/permission',
                     contentType: 'application/json',
                     success: function (response) {
+                        $('#team-members-spinner').hide();
                         const permissions = response.data;
                         const container = $('#edit-permissions-container');
                         container.empty();
@@ -1427,6 +1443,7 @@
                             url: `/api/role/${roleId}/permission`,
                             contentType: 'application/json',
                             success: function (res) {
+                                $('#team-members-spinner').hide();
                                 const assigned = res.data.map(item => item.permission_id);
 
                                 assigned.forEach(id => {
@@ -1442,11 +1459,13 @@
                             ,
                             error: function () {
                                 showToast("Error", "Failed to fetch assigned permissions.", "text-danger");
+                                $('#team-members-spinner').hide();
                             }
                         });
                     },
                     error: function () {
                         showToast("Error", "Failed to load permissions.", "text-danger");
+                        $('#team-members-spinner').hide();
                     }
                 });
             }
@@ -1532,15 +1551,18 @@
                     cancelButtonText: 'Cancel',
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        $('#team-members-spinner').show();
                         $.ajax({
                             url: `/api/${entity}/${id}`,
                             method: 'DELETE',
                             success: function (response) {
+                                $('#team-members-spinner').hide();
                                 Swal.fire('Deleted!', `${entity} has been deleted.`, 'success');
 
                                 $('#requestsTable').DataTable().ajax.reload(null, false);
                             },
                             error: function (xhr) {
+                                $('#team-members-spinner').hide();
                                 Swal.fire('Error', xhr.responseText || `Failed to delete ${entity}`, 'error');
                             }
                         });
@@ -1578,7 +1600,7 @@
                     Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
                     return;
                 }
-
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: `/api/staff/${id}`,
                     method: 'PUT',
@@ -1606,6 +1628,7 @@
                             data: JSON.stringify({ RoleIds: selectedRoles }),
                             success: function () {
                                 $('#editStaffModal').modal('hide');
+                                $('#team-members-spinner').hide();
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success!',
@@ -1615,11 +1638,13 @@
                                 })
                             },
                             error: function () {
+                                $('#team-members-spinner').show();
                                 Swal.fire('Error', 'Failed to update staff roles.', 'error');
                             }
                         });
                     },
                     error: function (xhr) {
+                        $('#team-members-spinner').show();
                         let message = 'Failed to update staff';
                         if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
                         Swal.fire('Error', message, 'error');
@@ -1648,7 +1673,7 @@
                 }
 
                 const formData = { name };
-
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: `/api/role/${id}`,
                     method: 'PUT',
@@ -1663,6 +1688,7 @@
                             data: JSON.stringify({ permissionIds: selectedPermissions }),
                             success: function () {
                                 $('#editRoleModal').modal('hide');
+                                $('#team-members-spinner').hide();
 
                                 Swal.fire({
                                     icon: 'success',
@@ -1684,6 +1710,7 @@
                                 }
                             },
                             error: function (xhr) {
+                                $('#team-members-spinner').hide();
                                 let message = 'Failed to update permissions';
                                 if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
                                 Swal.fire('Error', message, 'error');
@@ -1692,6 +1719,7 @@
 
                     },
                     error: function (xhr) {
+                        $('#team-members-spinner').hide();
                         let message = 'Failed to update role';
                         if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
                         Swal.fire('Error', message, 'error');
@@ -1713,7 +1741,7 @@
                     Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
                     return;
                 }
-
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: `/api/disability/${id}`,
                     method: 'PUT',
@@ -1721,6 +1749,7 @@
                     data: JSON.stringify(formData),
                     success: function (response) {
                         $('#editStaffModal').modal('hide');
+                        $('#team-members-spinner').hide();
                         Swal.fire('Success', 'Disability updated successfully', 'success', 2000);
 
                         if (requestsTable) {
@@ -1737,6 +1766,7 @@
                         }
                     },
                     error: function (xhr) {
+                        $('#team-members-spinner').hide();
                         let message = 'Failed to update Disability';
                         if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
                         Swal.fire('Error', message, 'error');
@@ -1758,7 +1788,7 @@
                     Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
                     return;
                 }
-
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: `/api/type/${id}`,
                     method: 'PUT',
@@ -1766,6 +1796,7 @@
                     data: JSON.stringify(formData),
                     success: function (response) {
                         $('#editStaffModal').modal('hide');
+                        $('#team-members-spinner').hide();
                         Swal.fire('Success', 'Type updated successfully', 'success', 2000);
 
                         if (requestsTable) {
@@ -1782,6 +1813,7 @@
                         }
                     },
                     error: function (xhr) {
+                        $('#team-members-spinner').show();
                         let message = 'Failed to update Type';
                         if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
                         Swal.fire('Error', message, 'error');
@@ -1804,7 +1836,7 @@
                     Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
                     return;
                 }
-
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: `/api/designation/${id}`,
                     method: 'PUT',
@@ -1812,6 +1844,7 @@
                     data: JSON.stringify(formData),
                     success: function (response) {
                         $('#editStaffModal').modal('hide');
+                        $('#team-members-spinner').hide();
                         Swal.fire('Success', 'Designation updated successfully', 'success', 2000);
 
                         if (requestsTable) {
@@ -1828,6 +1861,7 @@
                         }
                     },
                     error: function (xhr) {
+                        $('#team-members-spinner').hide();
                         let message = 'Failed to update Designation';
                         if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
                         Swal.fire('Error', message, 'error');

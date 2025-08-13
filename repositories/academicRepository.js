@@ -1,10 +1,10 @@
 const Section = require('../models/sectionModel');
-const Class = require('../models/classModel');
+const Class = require('../models/ClasssModel');
 const Gender = require('../models/genderModel');
 const Stream = require('../models/streamModel');
-const Subject = require('../models/subjectModel');
-const Term = require('../models/termModel');
-const Year = require('../models/yearModel');
+const Subject = require('../models/SubjectsModel');
+const Term = require('../models/TermsModel');
+const Year = require('../models/YearsModel');
 const Entity = require('../models/entityModel');
 
 class academicRepository {
