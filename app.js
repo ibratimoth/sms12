@@ -73,7 +73,7 @@ app.use('/term', termRoutes)
 app.use('/assessment', assessmentRoutes)
 app.use('/examination', examinationRoutes)
 
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT || 3006;
 
 const server = app.listen(PORT, () => {
     logger.info(`Successfully connected to the server url http://localhost:${PORT}`);
