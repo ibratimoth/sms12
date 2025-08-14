@@ -44,6 +44,7 @@ router.post('/entity', AcademicController.createEntity.bind(AcademicController))
 router.put('/entity/:EntityId', AcademicController.updateEntity.bind(AcademicController));
 router.delete('/entity/:EntityId', AcademicController.deleteEntity.bind(AcademicController));
 router.get('/staff', StaffController.getAllStaffs.bind(StaffController));
+router.get('/staffs', StaffController.getAllStaff.bind(StaffController));
 router.get('/staff/:StaffId', StaffController.getStaffById.bind(StaffController));
 router.post('/staff', StaffController.createStaff.bind(StaffController));
 router.post('/login', StaffController.login.bind(StaffController));

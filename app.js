@@ -30,29 +30,29 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
 app.get('/record', (req, res) => {
-   const email = req.session.staffEmail || '';
-    const lastname = req.session.lastname || '';
-    res.render('recordView', {email, lastname});
+  const email = req.session.staffEmail || '';
+  const lastname = req.session.lastname || '';
+  res.render('recordView', { email, lastname });
 })
 
 app.get('/', (req, res) => {
-    return res.render('login');
+  return res.render('login');
 });
 
 app.get('/Home', (req, res) => {
-    return res.render('index');
+  return res.render('index');
 });
 
 app.get('/table', (req, res) => {
-      const email = req.session.staffEmail || '';
-    const lastname = req.session.lastname || '';
-    return res.render('table', {email, lastname});
+  const email = req.session.staffEmail || '';
+  const lastname = req.session.lastname || '';
+  return res.render('table', { email, lastname });
 });
 
 app.get('/view', (req, res) => {
-      const email = req.session.staffEmail || '';
-    const lastname = req.session.lastname || '';
-    return res.render('viewattendance', {email, lastname});
+  const email = req.session.staffEmail || '';
+  const lastname = req.session.lastname || '';
+  return res.render('viewattendance', { email, lastname });
 });
 
 app.get('/session-data', (req, res) => {
@@ -61,6 +61,12 @@ app.get('/session-data', (req, res) => {
 
 app.get('/cookie-data', (req, res) => {
   res.json(req.cookies);
+});
+
+app.get('/staff', (req, res) => {
+  const email = req.session.staffEmail || '';
+  const lastname = req.session.lastname || '';
+  return res.render('staff', { email, lastname });
 });
 
 app.use('/api', academicRoutes);
@@ -76,7 +82,7 @@ app.use('/examination', examinationRoutes)
 const PORT = process.env.PORT || 3006;
 
 const server = app.listen(PORT, () => {
-    logger.info(`Successfully connected to the server url http://localhost:${PORT}`);
+  logger.info(`Successfully connected to the server url http://localhost:${PORT}`);
 });
 
 module.exports = server;

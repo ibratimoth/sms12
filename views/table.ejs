@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="/assets/css/style1.css">
     <link id="skin-default" rel="stylesheet" href="../../assets/css/themee1e3.css?ver=3.2.4">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
 
-     <style>
+    <style>
         .spinner-container {
             position: fixed;
             top: 50%;
@@ -34,6 +35,11 @@
             background-color: rgb(21, 21, 41, 0.5);
             color: #0c385f;
             /* Optional: background shade */
+        }
+
+        .nk-sidebar {
+            background-color: #035994 !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -62,7 +68,7 @@
                                                     <div class="form-control-wrap">
                                                         <div class="form-icon form-icon-right xl"><em
                                                                 class="icon ni ni-calendar-alt"></em></div>
-                                                        <input type="text"
+                                                        <input type="date"
                                                             class="form-control form-control-xl form-control-outlined date-picker"
                                                             id="outlined-date-picker">
                                                         <label class="form-label-outlined"
@@ -99,34 +105,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="nk-footer">
-                            <div class="container-fluid">
-                                <div class="nk-footer-wrap">
-                                    <div class="nk-footer-copyright"> &copy; 2024 DashLite. Template by <a
-                                            href="https://softnio.com/" target="_blank">Softnio</a></div>
-                                    <div class="nk-footer-links">
-                                        <ul class="nav nav-sm">
-                                            <li class="nav-item dropup"><a href="#"
-                                                    class="dropdown-toggle dropdown-indicator has-indicator nav-link text-base"
-                                                    data-bs-toggle="dropdown"
-                                                    data-offset="0,10"><span>English</span></a>
-
-                                            </li>
-                                            <li class="nav-item"><a data-bs-toggle="modal" href="#region"
-                                                    class="nav-link"><em class="icon ni ni-globe"></em><span
-                                                        class="ms-1">Select
-                                                        Region</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <div id="team-members-spinner" class="spinner-container" style="display:none;">
+                            <div class="d-flex justify-content-center align-items-center vh-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+                                    preserveAspectRatio="xMidYMid" width="200" height="200"
+                                    style="shape-rendering: auto; display: block; background: transparent;"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <circle stroke-linecap="round" fill="none"
+                                            stroke-dasharray="50.26548245743669 50.26548245743669" stroke="#035994"
+                                            stroke-width="8" r="32" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <circle stroke-linecap="round" fill="none" stroke-dashoffset="36.12831551628262"
+                                            stroke-dasharray="36.12831551628262 36.12831551628262" stroke="#5b9573"
+                                            stroke-width="8" r="23" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;-360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <g></g>
+                                    </g>
+                                </svg>
                             </div>
                         </div>
+                        <%-include('footer.ejs')%>
                 </div>
         </div>
     </div>
 
-    <div class="modal fade" id="attendanceModal" tabindex="-1" aria-labelledby="attendanceModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="attendanceModal" tabindex="-1" aria-labelledby="attendanceModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -134,7 +146,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered" id="attendanceTable">
+                    <table class="table table-bordered" id="attendanceModalTable">
                         <thead>
                             <tr>
                                 <th>Staff Name</th>
@@ -163,6 +175,7 @@
     <script src="../../assets/js/libs/datatable-btnse1e3.js?ver=3.2.4"></script>
 
     <script>
+
         $(document).ready(function () {
             const currentPath = window.location.pathname;
             console.log("Current Path:", currentPath);
@@ -177,8 +190,9 @@
                 }
             });
         });
-        
+
         $(document).ready(function () {
+
 
             function loadAttendanceSummary() {
                 $.ajax({
@@ -243,12 +257,14 @@
                 if (!selectedDate) return;
 
                 // Fetch staff list via AJAX
+                $('#team-members-spinner').show();
                 $.ajax({
-                    url: '/api/staff', // Your endpoint to get staff list
+                    url: '/api/staffs', // Your endpoint to get staff list
                     method: 'GET',
                     success: function (res) {
+                        $('#team-members-spinner').hide();
                         if (res.success && res.data.length > 0) {
-                            const tbody = $('#attendanceTable tbody');
+                            const tbody = $('#attendanceModalTable tbody');
                             tbody.empty(); // clear previous rows
 
                             res.data.forEach(staff => {
@@ -267,6 +283,7 @@
                         }
                     },
                     error: function (err) {
+                        $('#team-members-spinner').hide();
                         console.error('Failed to fetch staff:', err);
                     }
                 });
@@ -302,6 +319,44 @@
                     const checkIn = $(this).find('.check-in').val() || null;
                     const checkOut = $(this).find('.check-out').val() || null;
 
+                    if (!isPresent && (!remark || remark.trim() === '')) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Validation Error',
+                            text: "Remarks are required for absent staff",
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
+                        return;
+                    }
+
+                    if (isPresent && !checkIn) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Validation Error',
+                            text: "Check-in time is required for present staff.",
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
+                        return;
+                    }
+
+                    if (isPresent && checkIn && selectedDate.isSame(moment(), 'day')) {
+                        const now = moment();
+                        const checkInTime = moment(checkIn, 'HH:mm');
+
+                        if (checkInTime.isBefore(now)) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Validation Error',
+                                text: "Check-in time cannot be earlier than the current time.",
+                                timer: 3000,
+                                showConfirmButton: false
+                            });
+                            return;
+                        }
+                    }
+
                     attendanceData.push({
                         staff_id: staffId,
                         date: date,
@@ -313,17 +368,38 @@
                 });
 
                 console.log('attendance data:', attendanceData);
+                $('#team-members-spinner').show();
                 $.ajax({
                     url: '/api/attendance',
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(attendanceData),
                     success: function (res) {
+                        $('#team-members-spinner').hide();
                         alert('Attendance saved successfully!');
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Created!',
+                            text: 'Attendance saved successfully!',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.reload()
+                        })
+
                         $('#attendanceModal').modal('hide');
                     },
                     error: function (err) {
+                        $('#team-members-spinner').hide();
                         console.error('Failed to save attendance:', err);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went wrong while saving attendance!',
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
                     }
                 });
             });

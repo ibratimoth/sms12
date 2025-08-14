@@ -7,6 +7,14 @@
         transition: background-color 0.2s ease, border-radius 0.2s ease;
     }
 
+    .nk-menu-link{
+         color: white !important;
+    }
+
+    .nk-menu-link .nk-menu-icon em{
+        color: white !important;
+    }
+
     .nk-menu-link:hover .nk-menu-icon em,
     .nk-menu-link.active .nk-menu-icon em {
         color: white !important;
@@ -44,9 +52,10 @@
     }
 
     .user-avatar {
-        background-color: white !important;
+        background-color: #035994 !important;
         /* change the circle's background */
         color: #fff !important;
+        font-size: 100px;
         /* makes the icon inside white */
     }
 

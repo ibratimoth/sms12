@@ -238,7 +238,11 @@ class StaffRepository {
     }
 
     async getAllDesignations() {
-        return await Designation.findAll({ order: [['created_at', 'DESC']] });
+        return await Designation.findAll({
+            order: [['created_at', 'DESC']], include: [
+                { model: Type, attributes: ['name'] }
+            ]
+        });
     }
 
     async createDesignation(DesignationData) {

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<!-- Mirrored from dashlite.net/demo1/components/tables/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 07:45:04 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>Roles | School Management System</title>
+       <link rel="stylesheet" href="/assets/css/style1.css">
+    <link rel="stylesheet" href="../../assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="../../assets/css/themee1e3.css?ver=3.2.4">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <style>
+        .spinner-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            /* Ensures it's above other content */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(21, 21, 41, 0.5);
+            color: #0c385f;
+        }
+                .nk-sidebar {
+            background-color: #035994 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="components-preview wide-md mx-auto">
+                                            <div class="nk-block-head nk-block-head-lg wide-sm">
+                                                <div class="nk-block-head-content">
+
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="nk-block nk-block-lg">
+                                                <div class="card card-bordered card-preview">
+                                                    <div class="card-inner">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center mb-4">
+                                                            <h6 class="nk-block-title fw-normal">Registered Roles
+                                                            </h6>
+                                                            <button class="btn btn-primary"
+                                                                onclick="showAddRoleModel( ); return false;">Add
+                                                                Role</button>
+                                                        </div>
+                                                        <table class="datatable-init-export nowrap table"
+                                                            data-export-title="Attendance">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Role name</th>
+                                                                    <th class="nk-tb-col nk-tb-col-tools text-end">
+                                                                        Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% roles.forEach((att, index)=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= index + 1 %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.name %>
+                                                                        </td>
+                                                                        <td class="nk-tb-col nk-tb-col-tools">
+                                                                            <ul class="nk-tb-actions gx-1">
+                                                                                <li>
+                                                                                    <div class="drodown dropstart">
+                                                                                        <!-- flipped to avoid clipping -->
+                                                                                        <a href="#"
+                                                                                            class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                            data-bs-toggle="dropdown">
+                                                                                            <em
+                                                                                                class="icon ni ni-more-h"></em>
+                                                                                        </a>
+                                                                                        <div
+                                                                                            class="dropdown-menu dropdown-menu-end">
+                                                                                            <ul
+                                                                                                class="link-list-opt no-bdr">
+                                                                                                <li>
+                                                                                                    <a href="#"
+                                                                                                        onclick="fetchAndShowRoleDetails('<%= att.id %>'); return false;">
+                                                                                                        <em
+                                                                                                            class="icon ni ni-eye"></em><span>Edit
+                                                                                                            Details</span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <a href="#"
+                                                                                                        onclick="deleteRole('<%= att.id %>'); return false;">
+                                                                                                        <em
+                                                                                                            class="icon ni ni-na"></em><span>Delete
+                                                                                                            User</span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <div id="team-members-spinner" class="spinner-container" style="display:none;">
+                            <div class="d-flex justify-content-center align-items-center vh-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+                                    preserveAspectRatio="xMidYMid" width="200" height="200"
+                                    style="shape-rendering: auto; display: block; background: transparent;"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <circle stroke-linecap="round" fill="none"
+                                            stroke-dasharray="50.26548245743669 50.26548245743669" stroke="#035994"
+                                            stroke-width="8" r="32" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <circle stroke-linecap="round" fill="none" stroke-dashoffset="36.12831551628262"
+                                            stroke-dasharray="36.12831551628262 36.12831551628262" stroke="#5b9573"
+                                            stroke-width="8" r="23" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;-360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <g></g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <%-include('footer.ejs')%>
+                </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="addRoleModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Role</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Role
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="role"> Role</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control" id="role"
+                                                placeholder="Enter role">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Permissions</label>
+                                        <div id="permissions-container" class="row">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-role">Create role</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editRoleModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Role</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Role
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <div class="form-group"><label class="form-label" for="role"> Role</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_role" placeholder="Enter role" name="role">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Permissions</label>
+                                        <div id="edit-permissions-container" class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="role_ID" name="role_ID">
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-role">Edit role</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="pmo-st pmo-dark" target="_blank" href="https://softnio.com/get-early-access/">
+        <div class="pmo-st-img"><img src="../../../images/landing/promo-investorm.png" alt="Investorm"></div>
+        <div class="pmo-st-text">Looking for Advanced <br> Investment Platform?</div>
+    </a>
+    <script src="../../assets/js/bundlee1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/scriptse1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/libs/datatable-btnse1e3.js?ver=3.2.4"></script>
+
+    <script>
+        $(document).ready(function () {
+            if (!$.fn.DataTable.isDataTable('.datatable-init-export')) {
+                $('.datatable-init-export').DataTable({
+                    responsive: true,
+                    dom: 'Bfrtip',
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                });
+            }
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+
+                window.location.reload();
+            }
+        });
+
+        $(document).ready(function () {
+            const currentPath = window.location.pathname;
+            console.log("Current Path:", currentPath);
+
+            $(".nk-menu-link").each(function () {
+                const linkPath = new URL(this.href).pathname;
+                console.log("Link Path:", linkPath);
+                if (linkPath === currentPath) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#logout-link').on('click', function (e) {
+                e.preventDefault();
+
+                console.log('reached')
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/logout',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        showToast("Success", "Logged out in successfully", "text-success");
+                        window.location.href = '/'
+                    },
+                    error: function (xhr) {
+                        let message = "Request failed. Please try again.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        showToast("Error", message, "text-danger");
+                        return;
+                    },
+                });
+            })
+
+            function showToast(title, body, titleClass) {
+                const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                const $toast = $(toastHtml);
+                $('.toast-container').append($toast);
+                const toast = new bootstrap.Toast($toast[0]);
+                toast.show();
+            }
+        })
+
+        $(document).ready(async function () {
+
+            await loadRoles();
+            async function loadRoles(selectedRoleId = null) {
+                $.ajax({
+                    url: '/api/role',
+                    method: 'GET',
+                    success: function (response) {
+                        const roles = response.data;
+                        const $select = $('#multiple_roles');
+                        $select.empty();
+                        $select.append('<option value="">---Select roles---</option>');
+
+                        roles.forEach(function (r) {
+                            const isSelected = r.id === selectedRoleId ? 'selected' : '';
+                            $select.append(`<option value="${r.id}" ${isSelected}>${r.name}</option>`);
+                        });
+
+                        $select.select2({
+                            placeholder: "---Select roles---",
+                            dropdownParent: $('#addStaffModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load role:', error);
+                    }
+                });
+            };
+
+            $('#create-role').on('click', function (e) {
+                e.preventDefault();
+
+                const name = $('#role').val();
+                const selectedPermissionIds = [];
+                $('.permission-checkbox:checked').each(function () {
+                    selectedPermissionIds.push($(this).val());
+                });
+
+
+                if (!name) {
+                    showToast("Validation Error", "Role name is required.", "text-warning");
+                    return;
+                }
+                if (selectedPermissionIds.length === 0) {
+                    showToast("Validation Error", "Please select at least one permission.", "text-warning");
+                    return;
+                }
+                console.log('selected permissions:', selectedPermissionIds)
+
+                const formData = { name };
+                $('#team-members-spinner').show();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/role',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        const createdRoleId = response.data?.id;
+                        if (!createdRoleId) {
+                            showToast("Error", "Role created but ID not returned.", "text-danger");
+                            return;
+                        }
+
+
+                        $.ajax({
+                            type: 'POST',
+                            url: `/api/role/${createdRoleId}/permission`,
+                            contentType: 'application/json',
+                            data: JSON.stringify({ permissionIds: selectedPermissionIds }),
+                            success: function () {
+                                $('#addRoleModal').modal('hide');
+                                $('#role').val('');
+                                $('#team-members-spinner').hide();
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: 'Role and permissions assigned successfully!',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.reload()
+                                });
+                            },
+                            error: function (xhr) {
+                                let message = "Failed to assign permissions.";
+                                if (xhr.responseJSON?.message) {
+                                    message = xhr.responseJSON.message;
+                                    $('#team-members-spinner').hide();
+                                }
+                                showToast("Error", message, "text-danger");
+                                $('#team-members-spinner').hide();
+                            }
+                        });
+                    },
+                    error: function (xhr) {
+                        let message = "Role creation failed.";
+                        if (xhr.responseJSON?.message) {
+                            message = xhr.responseJSON.message;
+                            $('#team-members-spinner').hide();
+                        }
+                        showToast("Error", message, "text-danger");
+                        $('#team-members-spinner').hide();
+                    }
+                });
+            });
+
+        })
+
+        $('#edit-role').on('click', function (e) {
+            e.preventDefault();
+
+            const id = $('#editRoleModal [name="role_ID"]').val();
+            const name = $('#editRoleModal [name="role"]').val();
+            const selectedPermissions = $('.permission-checkbox:checked').map(function () {
+                return $(this).val();
+            }).get();
+
+            console.log('selected:', selectedPermissions);
+
+            if (!name) {
+                Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                return;
+            }
+            if (selectedPermissions.length === 0) {
+                Swal.fire('Validation Error', 'Please select at least one permission', 'warning');
+                return;
+            }
+
+            const formData = { name };
+            $('#team-members-spinner').show();
+            $.ajax({
+                url: `/api/role/${id}`,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: `/api/role/${id}/permission`,
+                        contentType: 'application/json',
+                        data: JSON.stringify({ permissionIds: selectedPermissions }),
+                        success: function () {
+                            $('#editRoleModal').modal('hide');
+                            $('#team-members-spinner').hide();
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Role and permissions updated successfully!',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                window.location.reload();
+                            })
+
+                        },
+                        error: function (xhr) {
+                            $('#team-members-spinner').hide();
+                            let message = 'Failed to update permissions';
+                            if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
+                            Swal.fire('Error', message, 'error');
+                        }
+                    });
+
+                },
+                error: function (xhr) {
+                    $('#team-members-spinner').hide();
+                    let message = 'Failed to update role';
+                    if (xhr.responseJSON?.message) message = xhr.responseJSON.message;
+                    Swal.fire('Error', message, 'error');
+                }
+            });
+        });
+
+        function deleteRole(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `You are about to delete this role. This action cannot be undone!`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#team-members-spinner').show();
+                    $.ajax({
+                        url: `/api/role/${id}`,
+                        method: 'DELETE',
+                        success: function (response) {
+                            $('#team-members-spinner').hide();
+                            Swal.fire('Deleted!', `role has been deleted.`, 'success').then(() => {
+                                window.location.reload()
+                            });
+                        },
+                        error: function (xhr) {
+                            $('#team-members-spinner').hide();
+                            Swal.fire('Error', xhr.responseText || `Failed to delete role`, 'error');
+                        }
+                    });
+                }
+            });
+        }
+
+        function fetchAndShowRoleDetails(id) {
+            $.ajax({
+                url: `/api/role/${id}`,
+                method: 'GET',
+                success: function (response) {
+                    const data = response.data;
+                    console.log(data);
+                    $('#editRoleModal [name="role"]').val(data.name);
+                    $('#editRoleModal [name="role_ID"]').val(data.id);
+                    loadAllPermissionsWithAssignment(data.id)
+                    $('#editRoleModal').modal('show');
+                },
+                error: function (xhr) {
+                    Swal.fire('Error', xhr.responseText || 'Unable to fetch details', 'error');
+                }
+            });
+        }
+
+        function loadAllPermissionsWithAssignment(roleId) {
+            console.log('list of permissions for role ID:', roleId);
+            $('#team-members-spinner').show();
+            $.ajax({
+                type: 'GET',
+                url: '/api/permission',
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#team-members-spinner').hide();
+                    const permissions = response.data;
+                    const container = $('#edit-permissions-container');
+                    container.empty();
+
+
+                    const grouped = permissions.reduce((acc, p) => {
+                        if (!acc[p.group]) acc[p.group] = [];
+                        acc[p.group].push(p);
+                        return acc;
+                    }, {});
+
+                    for (const group in grouped) {
+                        const html = `
+                <div class="col-md-6 mb-4">
+                    <div class="card card-bordered h-100">
+                        <div class="card-inner">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input group-checkbox" id="group-${group}" data-group="${group}">
+                                    <label class="custom-control-label fw-bold text-capitalize" for="group-${group}">${group}</label>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="row permissions-list" id="permissions-for-${group}">
+                                ${grouped[group].map(p => `
+                                <div class="col-sm-6 mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input permission-checkbox" id="perm-${p.id}" value="${p.id}" data-group="${group}">
+                                        <label class="custom-control-label" for="perm-${p.id}">${p.label}</label>
+                                    </div>
+                                </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                        container.append(html);
+                    }
+
+
+                    $('.group-checkbox').on('change', function () {
+                        const group = $(this).data('group');
+                        $(`.permission-checkbox[data-group="${group}"]`).prop('checked', $(this).prop('checked'));
+                    });
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: `/api/role/${roleId}/permission`,
+                        contentType: 'application/json',
+                        success: function (res) {
+                            $('#team-members-spinner').hide();
+                            const assigned = res.data.map(item => item.permission_id);
+
+                            assigned.forEach(id => {
+                                const selector = `[id='perm-${id}']`;
+                                const checkbox = $(selector);
+                                if (checkbox.length) {
+                                    checkbox.prop('checked', true);
+                                } else {
+                                    console.warn(`Checkbox not found for ID: perm-${id}`);
+                                }
+                            });
+                        }
+                        ,
+                        error: function () {
+                            showToast("Error", "Failed to fetch assigned permissions.", "text-danger");
+                            $('#team-members-spinner').hide();
+                        }
+                    });
+                },
+                error: function () {
+                    showToast("Error", "Failed to load permissions.", "text-danger");
+                    $('#team-members-spinner').hide();
+                }
+            });
+        }
+
+        function showAddRoleModel() {
+            console.log('reached');
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/permission',
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log('response:', response.data);
+                    const permissions = response.data;
+                    const permissionsContainer = $('#permissions-container');
+                    permissionsContainer.empty();
+
+                    const groupedPermissions = permissions.reduce((acc, permission) => {
+                        const groupName = permission.group;
+                        if (!acc[groupName]) {
+                            acc[groupName] = [];
+                        }
+                        acc[groupName].push(permission);
+                        return acc;
+                    }, {});
+
+                    for (const group in groupedPermissions) {
+                        const groupPermissions = groupedPermissions[group];
+                        const cardHtml = `
+                    <div class="col-md-6 mb-4">
+                        <div class="card card-bordered h-100">
+                            <div class="card-inner">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input group-checkbox" id="group-${group}" data-group="${group}">
+                                        <label class="custom-control-label text-capitalize fw-bold" for="group-${group}">
+                                            ${group}
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr class="my-2">
+                                <div class="row permissions-list" id="permissions-for-${group}">
+                                    ${groupPermissions.map(p => `
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input permission-checkbox" id="permission-${p.id}" value="${p.id}" data-group="${group}">
+                                                <label class="custom-control-label" for="permission-${p.id}">${p.label}</label>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                        permissionsContainer.append(cardHtml);
+                    }
+
+                    $('.group-checkbox').on('change', function () {
+                        const group = $(this).data('group');
+                        $(`.permission-checkbox[data-group="${group}"]`).prop('checked', $(this).prop('checked'));
+                    });
+                    $('#addRoleModal').modal('show');
+                },
+                error: function (xhr) {
+                    $('#addRoleModal').modal('hide');
+                    console.error('Error loading permissions:', xhr.responseText);
+                }
+            });
+        }
+    </script>
+</body>
+<!-- Mirrored from dashlite.net/demo1/components/tables/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 07:45:04 GMT -->
+
+</html>

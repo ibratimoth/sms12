@@ -9,6 +9,38 @@ class StaffController {
 
     async getAllStaffs(req, res) {
         try {
+            const email = req.session.staffEmail || '';
+            const lastname = req.session.lastname || '';
+            const results = await this.staffServices.getAllStaffs();
+
+            if (!results.success) {
+                return res.status(500).json({
+                    status: 500,
+                    success: results.success,
+                    message: results.message,
+                    error: results.error
+                })
+            }
+
+            return res.render('staff', {
+                email,
+                lastname,
+                staffs: results.data || [],
+            });
+        } catch (error) {
+            console.log('error:', error);
+            return res.status(500).json({
+                status: 500,
+                success: results.success,
+                message: results.message,
+                error: results.error
+            })
+        }
+    }
+
+    async getAllStaff(req, res) {
+        try {
+
             const results = await this.staffServices.getAllStaffs();
 
             if (!results.success) {
@@ -514,6 +546,8 @@ class StaffController {
 
     async getAllRoles(req, res) {
         try {
+            const email = req.session.staffEmail || '';
+            const lastname = req.session.lastname || '';
             const results = await this.staffServices.getAllRoles();
 
             if (!results.success) {
@@ -525,21 +559,11 @@ class StaffController {
                 })
             }
 
-            if (results.success && results.data.length === 0) {
-                return res.status(200).json({
-                    status: 200,
-                    success: results.success,
-                    message: results.message,
-                    data: results.data
-                })
-            }
-
-            return res.status(200).json({
-                status: 200,
-                success: results.success,
-                message: results.message,
-                data: results.data
-            })
+            return res.render('role', {
+                email,
+                lastname,
+                roles: results.data || [],
+            });
         } catch (error) {
             console.log('error:', error);
             return res.status(500).json({
@@ -1212,6 +1236,8 @@ class StaffController {
 
     async getAllDesignations(req, res) {
         try {
+            const email = req.session.staffEmail || '';
+            const lastname = req.session.lastname || '';
             const results = await this.staffServices.getAllDesignations();
 
             if (!results.success) {
@@ -1223,21 +1249,11 @@ class StaffController {
                 })
             }
 
-            if (results.success && results.data.length === 0) {
-                return res.status(200).json({
-                    status: 200,
-                    success: results.success,
-                    message: results.message,
-                    data: results.data
-                })
-            }
-
-            return res.status(200).json({
-                status: 200,
-                success: results.success,
-                message: results.message,
-                data: results.data
-            })
+            return res.render('designation', {
+                email,
+                lastname,
+                designations: results.data || [],
+            });
         } catch (error) {
             console.log('error:', error);
             return res.status(500).json({
@@ -1517,8 +1533,8 @@ class StaffController {
             }
 
             if (results.success && results.message === 'RolesPermission already assigned') {
-                return res.status(400).json({
-                    status: 400,
+                return res.status(200).json({
+                    status: 200,
                     success: results.success,
                     message: results.message,
                     data: results.data
@@ -1815,8 +1831,8 @@ class StaffController {
 
     async getAttendanceByDate(req, res) {
         try {
-                  const email = req.session.staffEmail || '';
-    const lastname = req.session.lastname || '';
+            const email = req.session.staffEmail || '';
+            const lastname = req.session.lastname || '';
             const { date } = req.params;
             if (!date) {
                 return res.status(400).send('Date is missing');

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<!-- Mirrored from dashlite.net/demo1/components/tables/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 07:45:04 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="/images/coat.png">
+    <title>Staff - School Management System</title>
+       <link rel="stylesheet" href="/assets/css/style1.css">
+    <link rel="stylesheet" href="../../assets/css/dashlitee1e3.css?ver=3.2.4">
+    <link id="skin-default" rel="stylesheet" href="../../assets/css/themee1e3.css?ver=3.2.4">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91615293-4"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-91615293-4');</script>
+    <style>
+        .spinner-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            /* Ensures it's above other content */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(21, 21, 41, 0.5);
+            color: #0c385f;
+        }
+                .nk-sidebar {
+            background-color: #035994 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="nk-body bg-lighter npc-general has-sidebar ">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <%-include('sidebar.ejs')-%>
+                <div class="nk-wrap ">
+                    <%-include('header.ejs')-%>
+                        <div class="nk-content ">
+                            <div class="container-fluid">
+                                <div class="nk-content-inner">
+                                    <div class="nk-content-body">
+                                        <div class="components-preview wide-md mx-auto">
+                                            <div class="nk-block-head nk-block-head-lg wide-sm">
+                                                <div class="nk-block-head-content">
+
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="nk-block nk-block-lg">
+                                                <div class="card card-bordered card-preview">
+                                                    <div class="card-inner">
+                                                        <div
+                                                            class="d-flex justify-content-between align-items-center mb-4">
+                                                            <h6 class="nk-block-title fw-normal">Registered Staffs
+                                                            </h6>
+                                                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                                                data-bs-target="#addStaffModal">Add staff</button>
+                                                        </div>
+                                                        <table class="datatable-init-export nowrap table"
+                                                            data-export-title="Attendance">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>Index Number</th>
+                                                                    <th>first name</th>
+                                                                    <th>last name</th>
+                                                                    <th>email</th>
+                                                                    <th>date of birth</th>
+                                                                    <th>mobile number</th>
+                                                                    <th class="nk-tb-col nk-tb-col-tools text-end">
+                                                                        Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% staffs.forEach((att, index)=> { %>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%= index + 1 %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.form_four_index_no %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.first_name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.last_name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.email %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.dob %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= att.mobile_number %>
+                                                                        </td>
+                                                                        <td class="nk-tb-col nk-tb-col-tools">
+                                                                            <ul class="nk-tb-actions gx-1">
+                                                                                <li>
+                                                                                    <div class="drodown dropstart">
+                                                                                        <!-- flipped to avoid clipping -->
+                                                                                        <a href="#"
+                                                                                            class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                                            data-bs-toggle="dropdown">
+                                                                                            <em
+                                                                                                class="icon ni ni-more-h"></em>
+                                                                                        </a>
+                                                                                        <div
+                                                                                            class="dropdown-menu dropdown-menu-end">
+                                                                                            <ul
+                                                                                                class="link-list-opt no-bdr">
+                                                                                                <li>
+                                                                                                    <a href="#"
+                                                                                                        onclick="fetchAndShowStaffDetails('<%= att.id %>'); return false;">
+                                                                                                        <em
+                                                                                                            class="icon ni ni-eye"></em><span>Edit
+                                                                                                            Details</span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <a href="#"
+                                                                                                        onclick="deleteStaff('<%= att.id %>'); return false;">
+                                                                                                        <em
+                                                                                                            class="icon ni ni-na"></em><span>Delete
+                                                                                                            User</span>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <% }) %>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;"></div>
+                        <div id="team-members-spinner" class="spinner-container" style="display:none;">
+                            <div class="d-flex justify-content-center align-items-center vh-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+                                    preserveAspectRatio="xMidYMid" width="200" height="200"
+                                    style="shape-rendering: auto; display: block; background: transparent;"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <circle stroke-linecap="round" fill="none"
+                                            stroke-dasharray="50.26548245743669 50.26548245743669" stroke="#035994"
+                                            stroke-width="8" r="32" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <circle stroke-linecap="round" fill="none" stroke-dashoffset="36.12831551628262"
+                                            stroke-dasharray="36.12831551628262 36.12831551628262" stroke="#5b9573"
+                                            stroke-width="8" r="23" cy="50" cx="50">
+                                            <animateTransform values="0 50 50;-360 50 50" keyTimes="0;1"
+                                                repeatCount="indefinite" dur="1s" type="rotate"
+                                                attributeName="transform"></animateTransform>
+                                        </circle>
+                                        <g></g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <%-include('footer.ejs')%>
+                </div>
+        </div>
+    </div>
+    <div class="modal fade" role="dialog" id="addStaffModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Add Staff</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Staff
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="infomation">
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="form_four_index_no"> Form
+                                            four index no</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="form_four_index_no" placeholder="Enter your form four index number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="first-name"> First
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="first_name" placeholder="Enter your first name"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="last-name"> Last
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="last_name" placeholder="Enter your last name"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="email"> email</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="email" placeholder="Enter your email"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="phone"> phone</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="mobile_number" placeholder="Enter your phone number"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="phone"> date of birth</label>
+                                        <div class="form-control-wrap"><input type="date" class="form-control" id="dob"
+                                                placeholder="Enter your date of birth"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="password"> Password</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="password" placeholder="Enter strong password e.g. Abc123!"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="gender">Gender</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="gender">
+                                                <option value="">---select gender---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="multiple_roles">Assign Roles</label>
+                                        <div class="form-control-wrap">
+                                            <select id="multiple_roles" class="form-select" multiple="multiple">
+                                                <!-- Keep this empty option for placeholder -->
+                                                <option value="" disabled></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label">Is Disabled</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="isDisabled">
+                                                <option value="">---select answer---</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="disability_input" style="display: none;">
+                                    <div class="form-group"><label class="form-label">Disability</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="disability">
+                                                <option value="">---select disability---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="create-staff">Create Staff</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" id="editStaffModal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content"><a href="#" class="close" data-bs-dismiss="modal"><em
+                        class="icon ni ni-cross-sm"></em></a>
+                <div class="modal-body modal-body-md">
+                    <h5 class="title">Edit Staff</h5>
+                    <ul class="nk-nav nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#infomation">Staff
+                                Detail's</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="edit_form_four_index_no">
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_form_four_index_no">
+                                            Form
+                                            four index no</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_form_four_index_no" name="form_four_index_no"
+                                                placeholder="Enter your form four index number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="staff_ID" name="staff_ID">
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_first_name"> First
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_first_name" name="first_name"
+                                                placeholder="Enter your first name"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_last_name"> Last
+                                            Name</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_last_name" name="last_name" placeholder="Enter your last name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_email"> email</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_email" name="email" placeholder="Enter your email"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_mobile_number">
+                                            phone</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_mobile_number" name="mobile_number"
+                                                placeholder="Enter your phone number"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_dob"> date of
+                                            birth</label>
+                                        <div class="form-control-wrap"><input type="date" class="form-control"
+                                                id="edit_dob" name="dob" placeholder="Enter your date of birth"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_password">
+                                            Password</label>
+                                        <div class="form-control-wrap"><input type="text" class="form-control"
+                                                id="edit_password" placeholder="Enter strong password e.g. Abc123!">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label" for="edit_gender">Gender</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_gender" name="gender_id">
+                                                <option value="">---select gender---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="edit_multiple_roles">Assign Roles</label>
+                                        <div class="form-control-wrap">
+                                            <select id="edit_multiple_roles" class="form-select" multiple="multiple">
+                                                <!-- Keep this empty option for placeholder -->
+                                                <option value="" disabled></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><label class="form-label">Is Disabled</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_isDisabled" name="isDisabled">
+                                                <option value="">---select answer---</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="edit_disability_input" style="display: none;">
+                                    <div class="form-group"><label class="form-label">Disability</label>
+                                        <div class="form-control-wrap"><select class="form-select js-select2"
+                                                id="edit_disability" name="disability_id">
+                                                <option value="">---select disability---</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                        <li><a href="#" data-bs-dismiss="modal" class="btn btn-primary sgn"
+                                                id="edit-staff">edit Staff</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="pmo-st pmo-dark" target="_blank" href="https://softnio.com/get-early-access/">
+        <div class="pmo-st-img"><img src="../../../images/landing/promo-investorm.png" alt="Investorm"></div>
+        <div class="pmo-st-text">Looking for Advanced <br> Investment Platform?</div>
+    </a>
+    <script src="../../assets/js/bundlee1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/scriptse1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/demo-settingse1e3.js?ver=3.2.4"></script>
+    <script src="../../assets/js/libs/datatable-btnse1e3.js?ver=3.2.4"></script>
+
+    <script>
+        $(document).ready(function () {
+            if (!$.fn.DataTable.isDataTable('.datatable-init-export')) {
+                $('.datatable-init-export').DataTable({
+                    responsive: true,
+                    dom: 'Bfrtip',
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                });
+            }
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+
+                window.location.reload();
+            }
+        });
+
+        $(document).ready(function () {
+            const currentPath = window.location.pathname;
+            console.log("Current Path:", currentPath);
+
+            $(".nk-menu-link").each(function () {
+                const linkPath = new URL(this.href).pathname;
+                console.log("Link Path:", linkPath);
+                if (linkPath === currentPath) {
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#logout-link').on('click', function (e) {
+                e.preventDefault();
+
+                console.log('reached')
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/logout',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        showToast("Success", "Logged out in successfully", "text-success");
+                        window.location.href = '/'
+                    },
+                    error: function (xhr) {
+                        let message = "Request failed. Please try again.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            message = xhr.responseJSON.message;
+                        }
+                        showToast("Error", message, "text-danger");
+                        return;
+                    },
+                });
+            })
+
+            function showToast(title, body, titleClass) {
+                const toastHtml = `
+                <div class="toast align-items-center text-bg-light border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                    <div class="toast-header">
+                        <strong class="me-auto ${titleClass}">${title}</strong>
+                        <small class="text-muted">Now</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">${body}</div>
+                </div>`;
+
+                const $toast = $(toastHtml);
+                $('.toast-container').append($toast);
+                const toast = new bootstrap.Toast($toast[0]);
+                toast.show();
+            }
+        })
+
+        $(document).ready(async function () {
+            await loadGenders();
+            await loadDisabilities();
+            await loadRoles();
+            async function loadGenders(selectedGenderId = null) {
+                $.ajax({
+                    url: '/api/gender',
+                    method: 'GET',
+                    success: function (response) {
+                        const genders = response.data;
+                        const $select = $('#gender');
+                        $select.empty();
+                        $select.append('<option value="">---Select gender---</option>');
+
+                        genders.forEach(function (gen) {
+                            const isSelected = gen.id === selectedGenderId ? 'selected' : '';
+                            $select.append(`<option value="${gen.id}" ${isSelected}>${gen.name}</option>`);
+                        });
+
+                        $select.select2({
+                            placeholder: "---Select gender---",
+                            dropdownParent: $('#addStaffModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load gender:', error);
+                    }
+                });
+            };
+
+            async function loadRoles(selectedRoleId = null) {
+                $.ajax({
+                    url: '/api/role',
+                    method: 'GET',
+                    success: function (response) {
+                        const roles = response.data;
+                        const $select = $('#multiple_roles');
+                        $select.empty();
+                        $select.append('<option value="">---Select roles---</option>');
+
+                        roles.forEach(function (r) {
+                            const isSelected = r.id === selectedRoleId ? 'selected' : '';
+                            $select.append(`<option value="${r.id}" ${isSelected}>${r.name}</option>`);
+                        });
+
+                        $select.select2({
+                            placeholder: "---Select roles---",
+                            dropdownParent: $('#addStaffModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load role:', error);
+                    }
+                });
+            };
+
+            async function loadDisabilities(selectedDisabilityId = null) {
+                $.ajax({
+                    url: '/api/disability',
+                    method: 'GET',
+                    success: function (response) {
+                        const disabilities = response.data;
+                        const $select = $('#disability');
+                        $select.empty();
+                        $select.append('<option value="">---Select disability---</option>');
+
+                        disabilities.forEach(function (dis) {
+                            const isSelected = dis.id === selectedDisabilityId ? 'selected' : '';
+                            $select.append(`<option value="${dis.id}" ${isSelected}>${dis.name}</option>`);
+                        });
+
+                        $select.select2({
+                            placeholder: "---Select disability---",
+                            dropdownParent: $('#addStaffModal')
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Failed to load disability:', error);
+                    }
+                });
+            };
+
+            $('#isDisabled').on('change', function () {
+                const answer = $(this).val();
+                console.log('changed to:', answer);
+
+                if (answer === "yes") {
+                    $('#disability_input').show();
+                } else {
+                    $('#disability_input').hide();
+                }
+            });
+
+            $('#gender').select2({
+                placeholder: "---select gender---",
+                allowClear: true
+            });
+
+            $('#isDisabled').select2({
+                placeholder: "---select answer---",
+                allowClear: true
+            });
+
+
+            $('#disability').select2({
+                placeholder: "---select disability type---",
+                allowClear: true
+            });
+
+            $('#multiple_roles').select2({
+                placeholder: '--- select roles ---',
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#addStaffModal')
+            });
+
+            $('#staff_type').select2({
+                placeholder: "---select staff type---",
+                allowClear: true
+            });
+
+            $('#create-staff').on('click', function (e) {
+                e.preventDefault();
+
+                const first_name = $('#first_name').val();
+                const last_name = $('#last_name').val();
+                const form_four_index_no = $('#form_four_index_no').val();
+                const email = $('#email').val();
+                const mobile_number = $('#mobile_number').val();
+                const password = $('#password').val();
+                const gender_id = $('#gender').val();
+                const disability_id = $('#disability').val() || null;
+                const dob = $('#dob').val();
+
+                if (!first_name || !last_name || !email || !password || !gender_id || !form_four_index_no || !mobile_number || !dob) {
+                    Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                    return;
+                }
+
+                const formData = { first_name, last_name, email, password, gender_id, form_four_index_no, mobile_number, disability_id, dob };
+                $('#team-members-spinner').show();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/staff',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function (response) {
+                        const staffId = response.data.id;
+
+                        const selectedRoleIds = $('#multiple_roles').val() || [];
+
+                        console.log('selectedRoles:', selectedRoleIds);
+
+                        $.ajax({
+                            type: 'POST',
+                            url: `/api/staff/${staffId}/role`,
+                            contentType: 'application/json',
+                            data: JSON.stringify({ RoleIds: selectedRoleIds }),
+                            success: function () {
+                                $('#team-members-spinner').hide();
+                                $('#addStaffModal').modal('hide');
+
+                                $('#first_name, #last_name, #email, #password, #gender, #mobile_number, #disability, #dob').val('');
+                                $('#multiple_roles').val(null).trigger('change');
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Created!',
+                                    text: 'Staff and roles assigned successfully.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.reload()
+                                })
+                            },
+                            error: function (xhr) {
+                                Swal.fire('Error', 'Staff created but failed to assign roles', 'error');
+                                $('#team-members-spinner').hide();
+                            }
+                        });
+                    },
+                    error: function (xhr) {
+                        let message = "Request failed. Please try again.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+
+                        Swal.fire('Error', message, 'error');
+                        $('#team-members-spinner').hide();
+                    }
+                });
+            });
+
+
+        })
+
+        $('#edit-staff').on('click', function (e) {
+            e.preventDefault();
+
+            const id = $('#editStaffModal [name="staff_ID"]').val();
+            const first_name = $('#editStaffModal [name="first_name"]').val();
+            const last_name = $('#editStaffModal [name="last_name"]').val();
+            const form_four_index_no = $('#editStaffModal [name="form_four_index_no"]').val();
+            const email = $('#editStaffModal [name="email"]').val();
+            const mobile_number = $('#editStaffModal [name="mobile_number"]').val();
+            const dob = $('#editStaffModal [name="dob"]').val();
+            const disability_id = $('#editStaffModal [name="disability_id"]').val() || null;
+            const gender_id = $('#editStaffModal [name="gender_id"]').val();
+            const password = $('#editStaffModal [name="password"]').val();
+
+            const formData = {
+                first_name,
+                last_name,
+                form_four_index_no,
+                email,
+                mobile_number,
+                dob,
+                disability_id,
+                gender_id,
+                password
+            };
+
+            if (!first_name || !last_name || !form_four_index_no || !email || !mobile_number || !dob || !gender_id) {
+                Swal.fire('Validation Error', 'Please fill all required fields', 'warning');
+                return;
+            }
+            $('#team-members-spinner').show();
+            $.ajax({
+                url: `/api/staff/${id}`,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+
+                    const selectedRoles = $('#edit_multiple_roles').val() || [];
+
+                    $.ajax({
+                        type: 'POST',
+                        url: `/api/staff/${id}/role`,
+                        contentType: 'application/json',
+                        data: JSON.stringify({ RoleIds: selectedRoles }),
+                        success: function () {
+                            $('#editStaffModal').modal('hide');
+                            $('#team-members-spinner').hide();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Staff and roles updated successfully!',
+                                timer: 2000,
+                                showConfirmButton: false
+                            }).then(() => {
+                                window.location.reload()
+                            })
+                        },
+                        error: function () {
+                            $('#team-members-spinner').show();
+                            Swal.fire('Error', 'Failed to update staff roles.', 'error');
+                        }
+                    });
+                },
+                error: function (xhr) {
+                    $('#team-members-spinner').show();
+                    let message = 'Failed to update staff';
+                    if (xhr.responseJSON && xhr.responseJSON.message) message = xhr.responseJSON.message;
+                    Swal.fire('Error', message, 'error');
+                }
+            });
+        });
+
+        function deleteStaff(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `You are about to delete this staff. This action cannot be undone!`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#team-members-spinner').show();
+                    $.ajax({
+                        url: `/api/staff/${id}`,
+                        method: 'DELETE',
+                        success: function (response) {
+                            $('#team-members-spinner').hide();
+                            Swal.fire('Deleted!', `staff has been deleted.`, 'success').then(() => {
+                                window.location.reload()
+                            });
+                        },
+                        error: function (xhr) {
+                            $('#team-members-spinner').hide();
+                            Swal.fire('Error', xhr.responseText || `Failed to delete staff`, 'error');
+                        }
+                    });
+                }
+            });
+        }
+
+        function fetchAndShowStaffDetails(id) {
+            $.ajax({
+                url: `/api/staff/${id}`,
+                method: 'GET',
+                success: function (response) {
+                    const data = response.data;
+                    console.log(data);
+                    $('#editStaffModal [name="first_name"]').val(data.first_name);
+                    $('#editStaffModal [name="form_four_index_no"]').val(data.form_four_index_no);
+                    $('#editStaffModal [name="last_name"]').val(data.last_name);
+                    $('#editStaffModal [name="email"]').val(data.email);
+                    $('#editStaffModal [name="mobile_number"]').val(data.mobile_number);
+                    $('#editStaffModal [name="dob"]').val(data.dob);
+                    $('#editStaffModal [name="disability_id"]').val(data.disability_id);
+                    $('#editStaffModal [name="staff_ID"]').val(data.id);
+                    if (data.disability_id) {
+                        $('#editStaffModal [name="isDisabled"]').val('yes').trigger('change');
+                        $('#edit_disability_input').show();
+                        loadEditDisabilities(data.disability_id);
+                    } else {
+                        $('#editStaffModal [name="isDisabled"]').val('no').trigger('change');;
+                        $('#edit_disability_input').hide();
+                        $('#editStaffModal [name="disability_id"]').val(null);
+                    }
+                    loadEditGenders(data.gender_id);
+                    loadAllRolesWithAssignment(data.id)
+                    $('#editStaffModal').modal('show');
+                },
+                error: function (xhr) {
+                    Swal.fire('Error', xhr.responseText || 'Unable to fetch details', 'error');
+                }
+            });
+        }
+
+        async function loadEditGenders(selectedGenderId = null) {
+            $('#team-members-spinner').show();
+            $.ajax({
+                url: '/api/gender',
+                method: 'GET',
+                success: function (response) {
+                    $('#team-members-spinner').hide();
+                    const genders = response.data;
+                    const $select = $('#edit_gender');
+                    $select.empty();
+                    $select.append('<option value="">---Select gender---</option>');
+
+                    genders.forEach(function (gen) {
+                        const isSelected = gen.id === selectedGenderId ? 'selected' : '';
+                        $select.append(`<option value="${gen.id}" ${isSelected}>${gen.name}</option>`);
+                    });
+
+                    $select.select2({
+                        placeholder: "---Select gender---",
+                        dropdownParent: $('#editStaffModal')
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to load gender:', error);
+                    $('#team-members-spinner').hide();
+                }
+            });
+        };
+
+        function loadAllRolesWithAssignment(staffId) {
+            const $select = $('#edit_multiple_roles');
+            $select.empty();
+
+            $('#team-members-spinner').show();
+            $.ajax({
+                type: 'GET',
+                url: '/api/role',
+                contentType: 'application/json',
+                success: function (response) {
+                    const roles = response.data;
+
+
+                    roles.forEach(role => {
+                        $select.append(`<option value="${role.id}">${role.name}</option>`);
+                    });
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: `/api/staff/${staffId}/role`,
+                        contentType: 'application/json',
+                        success: function (res) {
+                            $('#team-members-spinner').hide();
+                            const assignedRoleIds = res.data.map(r => r.role_id);
+
+
+                            $select.val(assignedRoleIds);
+
+
+                            $select.select2({
+                                placeholder: "---Select roles---",
+                                dropdownParent: $('#editStaffModal'),
+                                width: '100%',
+                                allowClear: true
+                            });
+                        },
+                        error: function () {
+                            showToast("Error", "Failed to fetch assigned roles.", "text-danger");
+                            $('#team-members-spinner').hide();
+                        }
+                    });
+                },
+                error: function () {
+                    showToast("Error", "Failed to load roles.", "text-danger");
+                    $('#team-members-spinner').hide();
+                }
+            });
+        }
+
+        async function loadEditDisabilities(selectedDisabilityId = null) {
+            $.ajax({
+                url: '/api/disability',
+                method: 'GET',
+                success: function (response) {
+                    const disabilities = response.data;
+                    const $select = $('#edit_disability');
+                    $select.empty();
+                    $select.append('<option value="">---Select disability---</option>');
+
+                    disabilities.forEach(function (dis) {
+                        const isSelected = dis.id === selectedDisabilityId ? 'selected' : '';
+                        $select.append(`<option value="${dis.id}" ${isSelected}>${dis.name}</option>`);
+                    });
+
+
+                    $select.select2({
+                        placeholder: "---Select disability---",
+                        dropdownParent: $('#addStaffModal')
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to load disability:', error);
+                }
+            });
+        };
+
+    </script>
+</body>
+<!-- Mirrored from dashlite.net/demo1/components/tables/table-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 07:45:04 GMT -->
+
+</html>
