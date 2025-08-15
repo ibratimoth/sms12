@@ -45,3 +45,29 @@ exports.remove = async (req, res) => {
     res.status(500).json({ message: 'failed to Delete Data', success: false, statusCode: 500, error: err.message });
   }
 };
+
+exports.getByParent = async (req, res) => {
+  try {
+    const terms = await query.getByParent(req.params.parentId);
+    if (!terms.length) {
+      return res.status(404).json({
+        message: 'No Data found for this parent',
+        success: false,
+        statusCode: 404
+      });
+    }
+    res.status(200).json({
+      message: 'Data fetched successfully',
+      success: true,
+      statusCode: 200,
+      data: terms
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to fetch data',
+      success: false,
+      statusCode: 500,
+      error: err.message
+    });
+  }
+};

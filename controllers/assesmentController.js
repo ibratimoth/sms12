@@ -2,8 +2,8 @@ const query = require('../queries/assessmentQuery');
 
 exports.getAll = async (req, res) => {
   try {
-    const terms = await query.getAll();
-    res.status(200).json({ message: 'Data fetched Successfully', success: true, statusCode: 200, data: terms});
+    const assessments = await query.getAll();
+    res.status(200).json({ message: 'Data fetched Successfully', success: true, statusCode: 200, data: assessments});
   } catch (err) {
     console.log('error', err);
     
@@ -13,9 +13,9 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = async (req, res) => {
   try {
-    const term = await query.getById(req.params.id);
-    if (!term) return res.status(404).json({ message: 'Data not found', success: false, statusCode: 404 });
-    res.status(200).json({ message: 'Data fetched Successfully', success: true, statusCode: 200, data: term});
+    const assessment = await query.getById(req.params.id);
+    if (!assessment) return res.status(404).json({ message: 'Data not found', success: false, statusCode: 404 });
+    res.status(200).json({ message: 'Data fetched Successfully', success: true, statusCode: 200, data: assessment});
   } catch (err) {
     res.status(500).json({ message: 'failed to fetch Data', success: false, statusCode: 500, error: err.message });
   }
@@ -23,8 +23,8 @@ exports.getOne = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const newTerm = await query.create(req.body);
-    res.status(201).json({  message: 'Data Created Successfully', success: true, statusCode: 201, data: newTerm});
+    const newAssessment = await query.create(req.body);
+    res.status(201).json({  message: 'Data Created Successfully', success: true, statusCode: 201, data: newAssessment});
   } catch (err) {
     res.status(500).json({ message: 'failed to Create Data', success: false, statusCode: 500, error: err.message });
   }
@@ -45,5 +45,31 @@ exports.remove = async (req, res) => {
     res.status(200).json({ message: 'Data Deleted successfully', success: true, statusCode: 200 });
   } catch (err) {
     res.status(500).json({ message: 'failed to Delete Data', success: false, statusCode: 500, error: err.message });
+  }
+};
+
+exports.getByParent = async (req, res) => {
+  try {
+    const assessments = await query.getByParent(req.params.parentId);
+    if (!assessments.length) {
+      return res.status(404).json({
+        message: 'No Data found for this parent',
+        success: false,
+        statusCode: 404
+      });
+    }
+    res.status(200).json({
+      message: 'Data fetched successfully',
+      success: true,
+      statusCode: 200,
+      data: assessments
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to fetch data',
+      success: false,
+      statusCode: 500,
+      error: err.message
+    });
   }
 };

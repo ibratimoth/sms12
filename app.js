@@ -35,6 +35,12 @@ app.get('/record', (req, res) => {
   res.render('recordView', { email, lastname });
 })
 
+app.get('/student', (req, res) => {
+  const email = req.session.staffEmail || '';
+  const lastname = req.session.lastname || '';
+  res.render('studentView', { email, lastname });
+})
+
 app.get('/', (req, res) => {
   return res.render('login');
 });

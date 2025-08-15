@@ -90,29 +90,13 @@
                                         <div class="nk-block-head nk-block-head-sm">
                                             <div class="nk-block-between">
                                                 <div class="nk-block-head-content">
-                                                    <h3 class="nk-block-title page-title">MANAGE SCHOOL ENTITIES</h3>
+                                                    <h3 class="nk-block-title page-title">Enroll Students</h3>
                                                     <P>Welcome to SMS</P>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="entitySelect" class="form-label">School Entities</label>
-                                            <select id="entitySelect" class="form-select" style="max-width: 300px;">
-                                                <option value="" selected disabled>-- Select Entity --</option>
-                                                <option value="year">Year</option>
-                                                <option value="class">Class</option>
-                                                <option value="stream">Stream</option>
-                                                <option value="subject">Subject</option>
-                                                <option value="term">Term</option>
-                                                <option value="assessment">Assessment</option>
-                                                <option value="examination">Examination</option>
-                                            </select>
-                                        </div>
-
-                                        <div id="parentSelectorContainer"></div>
-
-                                        <div id="dataContent">
+                                            </div>
+                                            <div id="parentSelectorContainer"></div>
+                                            <div id="dataContent">
                                         </div>
                                     </div>
                                 </div>
@@ -220,6 +204,7 @@
                     year: { parentField: null, api: '/year', fields: ['name', 'start_date', 'end_date', 'is_active'] },
                     class: { parentField: 'year_id', api: '/class', parentEntity: 'year', fields: ['name', 'capacity', 'year_id'] },
                     stream: { parentField: 'class_id', api: '/stream', parentEntity: 'class', fields: ['name', 'capacity', 'class_id'] },
+                    student: { parentField: 'stream_id', api: '/student', parentEntity: 'stream', fields: ['first_name', 'middle_name', 'last_name', 'birth_date', 'gender', 'stream_id'], enums: { gender: ['Male', 'Female'] } },
                     subject: { parentField: 'class_id', api: '/subject', parentEntity: 'class', fields: ['name', 'code', 'is_optional', 'class_id'], enums: { is_optional: ['TRUE', 'FALSE'] } },
                     term: { parentField: 'year_id', api: '/term', parentEntity: 'year', fields: ['name', 'start_date', 'end_date', 'year_id'] },
                     assessment: { parentField: 'term_id', api: '/assessment', parentEntity: 'term', fields: ['name', 'term_id'] },
@@ -693,7 +678,7 @@
                         const deferreds = parentChain.map(pEntity => fetchParentData(pEntity));
 
                         Swal.fire({
-                            title: `Loading parent data...`,
+                            title: `Loading data...`,
                             allowOutsideClick: false,
                             didOpen: () => Swal.showLoading()
                         });
@@ -703,16 +688,16 @@
                             renderParentChain();
                         }).fail(() => {
                             Swal.close();
-                            Swal.fire('Error', 'Failed to load parent data.', 'error');
+                            Swal.fire('Error', 'Failed to load data.', 'error');
                         });
                     } else {
                         fetchChildData(entity);
                     }
                 }
 
-                $('#entitySelect').on('change', function () {
-                    const selected = $(this).val();
-                    loadData(selected);
+              $(document).ready(function() {
+                    // Call the function directly with the value 'student'
+                    loadData('student');
                 });
 
                 $(document).on('click', '#addBtn', function () {
